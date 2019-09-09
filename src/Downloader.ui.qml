@@ -92,9 +92,8 @@ Item {
     FolderDialog {
         id: folderDialog
         currentFolder: ""
-        folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+//        folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
         onFolderChanged: {
-            //ЫfolderModel.folder = folder;
             texturl.text= folder;
             logEdit.text= folder + '\n' + logEdit.text
         }

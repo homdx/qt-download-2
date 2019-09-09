@@ -62,6 +62,7 @@ Item {
        y: 40
        text: "Open"
        onClicked: {
+            fileDialog.visible = true
            fileDialog.Open
             // texturl.text= fileDialog.fileUrls
             //fileDialog.Open

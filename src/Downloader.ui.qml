@@ -41,7 +41,7 @@ Item {
     Connections {
         target: texturl
         onClicked: {
-                langswitch.setAppPath = texturl.text;
+                //langswitch.setAppPath = texturl.text;
         }
     }
 

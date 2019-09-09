@@ -38,13 +38,6 @@ Item {
         font.pixelSize: 18
     }
 
-    Connections {
-        target: texturl
-        onClicked: {
-                //langswitch.setAppPath = texturl.text;
-        }
-    }
-
     Button {
        x: 100
        y: 40
@@ -87,7 +80,12 @@ Item {
        onClicked: folderDialog.open()
     }
 
-
+    Button {
+       x: 330
+       y: 40
+       text: "u.."
+       onClicked: logEdit.text= folderDialog.folder + '\n' + logEdit.text
+    }
 
     FolderDialog {
         id: folderDialog
@@ -95,8 +93,8 @@ Item {
         folder: texturl.text
             // StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
         onFolderChanged: {
-            texturl.text= folder;
-            logEdit.text= folder + '\n' + logEdit.text
+           texturl.text= folder;
+            //logEdit.text= folder + '\n' + logEdit.text
         }
     }
 
@@ -126,7 +124,6 @@ Item {
         }
         Component.onCompleted: visible = true
     }
-
 
     Button {
        x: 100

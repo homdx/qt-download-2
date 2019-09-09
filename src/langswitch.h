@@ -9,7 +9,7 @@ class LangSwitch: public QObject
     Q_PROPERTY(QString userName READ userName WRITE setUserName NOTIFY userNameChanged)
     //Q_PROPERTY(QString appPath READ getAppPath WRITE setAppPath)
     Q_PROPERTY(QString requestPermissions READ requestPermissions)
-    Q_PROPERTY(QString getAppPath READ getAppPath)
+    //Q_PROPERTY(QString getAppPath READ getAppPath WRITE setAppPath)
     Q_PROPERTY(QString setAppPath WRITE setAppPath)
 
 public:
@@ -18,7 +18,7 @@ public:
     QString userName();
     QString getAppPath();
     //QString AppPathChange();
-    QString setAppPath(const QString &appPathChange);
+    void setAppPath(const QString &appPathChange);
     void setUserName(const QString &userName);
     bool requestPermissions();
 

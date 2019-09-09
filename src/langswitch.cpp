@@ -21,11 +21,13 @@ QString LangSwitch::getAppPath()
     return AppPath;
 }
 
-QString LangSwitch::setAppPath(const QString &appPathChange)
-{   qDebug() << "App path now is: " << appPathChange;
+void LangSwitch::setAppPath(const QString &appPathChange)
+{
+    qDebug() << "started setAppPath cpp function";
+    qDebug() << "App path now is: " << appPathChange;
     qDebug() << "Old path m_AppPath value is: " << appPathChange;
     m_appPath = appPathChange;
-    return m_appPath;
+    //return m_appPath;
 }
 QString LangSwitch::userName()
 {

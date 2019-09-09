@@ -15,11 +15,12 @@ Item {
         id: langswitch
     }
 
-    Text {
+    TextInput {
         id: texturl
         //x: 114
         y: 140
         x: 60
+
         width: parent.width-120
         height: 20
         text: qsTr("Text Input")
@@ -29,8 +30,22 @@ Item {
     Connections {
         target: texturl
         onClicked: {
-                langswitch.setAppPath(texturl.text);
+                langswitch.setAppPath = texturl.text;
         }
+    }
+
+    Button {
+       x: 100
+       y: 40
+       text: "D start"
+       onClicked: {
+           download1.running
+            download1.start
+           download2.running
+            download2.start
+           download3.running
+            download3.start
+       }
     }
 
     Button {
@@ -68,6 +83,7 @@ Item {
         }
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
+            texturl.text = fileDialog.fileUrls[0]
             //Qt.quit()
         }
         onRejected: {
@@ -84,9 +100,9 @@ Item {
        text: "Set path"
        onClicked: {
             console.info('start setAppPath')
-            ff = langswitch.setAppPath(texturl.text)
-           console.log('setAppPath done and returned is =' + fff)
-           m_appPath = fff
+            langswitch.setAppPath = texturl.text
+           // console.log('setAppPath done and returned is =' + fff)
+           //m_appPath = fff
            console.info('done setAppPath')
        }
     }
@@ -126,7 +142,7 @@ Item {
         //destination: "file:///tmp/test.png"
         destination: "file://" + langswitch.GetAppPath + "/test.png"
 
-        running: true
+//        running: true
 
         followRedirects: true
         onRedirected: console.log('Redirected',url,'->',redirectUrl)
@@ -147,7 +163,7 @@ Item {
         destination: "file://" + langswitch.GetAppPath + "/QuickDownload_test.zip"
 
         overwrite: true
-        running: !download1.running
+//        running: !download1.running
 
         onStarted: console.log('Started download',url)
         onError: console.error(errorString)
@@ -163,7 +179,7 @@ Item {
         destination: "file://" + langswitch.GetAppPath + "/QuickDownload_test_readme.txt"
 
         overwrite: true
-        running: true
+ //       running: true
 
         onStarted: console.log('Started download',url)
         onError: console.error(errorString)

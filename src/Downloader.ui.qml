@@ -66,6 +66,7 @@ Item {
        y: 40
        text: "Open"
        onClicked: {
+           fileDialog.folder = texturl.text
             fileDialog.visible = true
            fileDialog.Open
             // texturl.text= fileDialog.fileUrls
@@ -81,16 +82,18 @@ Item {
     }
 
     Button {
-       x: 330
+       x: 360
        y: 40
        text: "u.."
-       onClicked: logEdit.text= folderDialog.folder + '\n' + logEdit.text
+       onClicked: {
+        logEdit.text= folderDialog.folder + '\n' + logEdit.text
+        folder: texturl.text
+       }
     }
 
     FolderDialog {
         id: folderDialog
         currentFolder: ""
-        folder: texturl.text
             // StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
         onFolderChanged: {
            texturl.text= folder;

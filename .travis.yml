@@ -5,12 +5,12 @@ before_install:
 - docker pull homdx/qt-android-docker
 - mkdir source
 - cd source
-- git clone https://github.com/homdx/qt-view
-- cd qt-view
+- git clone https://github.com/homdx/qt-download-2
+- cd qt-download-2
 script:
 - docker build -t test .
 - mkdir apk
-- docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-view/apk:/app2 -d
+- docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-download-2/apk:/app2 -d
   test
 - docker exec -it test cp /app/android-build-debug.apk /app2/dev-preview.apk
 - ls -la apk

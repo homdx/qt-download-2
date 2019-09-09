@@ -15,6 +15,17 @@ Item {
         id: langswitch
     }
 
+    TextEdit {
+        id: logEdit
+        x: 20
+        y: 222
+        width: parent.width-40
+        height: 167
+        wrapMode: TextEdit.WrapAnywhere
+        text: qsTr("Text Edit")
+        font.pixelSize: 12
+    }
+
     TextInput {
         id: texturl
         //x: 114
@@ -69,6 +80,26 @@ Item {
        }
     }
 
+    Button {
+       x: 280
+       y: 40
+       text: " .. "
+       onClicked: folderDialog.open();
+    }
+
+
+
+    FolderDialog {
+        id: folderDialog
+        currentFolder: ""
+        folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+        onFolderChanged: {
+            //ЫfolderModel.folder = folder;
+            texturl.text= folder;
+            logEdit.text= folder + '\n' + logEdit.text
+        }
+    }
+
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
@@ -85,6 +116,7 @@ Item {
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
             texturl.text = fileDialog.fileUrls[0]
+            logEdit.text= fileDialog.fileUrls[0] + '\n' + logEdit.text
             //Qt.quit()
         }
         onRejected: {
@@ -112,7 +144,7 @@ Item {
 
 
      Button {
-        y: 340
+        y: 40
         text: "Stor Req"
         onClicked: {
             console.info('permsreq requested before')

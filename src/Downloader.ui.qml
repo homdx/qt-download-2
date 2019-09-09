@@ -84,7 +84,7 @@ Item {
        x: 280
        y: 40
        text: " .. "
-       onClicked: folderDialog.open();
+       onClicked: folderDialog.open()
     }
 
 
@@ -92,7 +92,8 @@ Item {
     FolderDialog {
         id: folderDialog
         currentFolder: ""
-//        folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+        folder: texturl.text
+            // StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
         onFolderChanged: {
             texturl.text= folder;
             logEdit.text= folder + '\n' + logEdit.text
@@ -105,7 +106,8 @@ Item {
         folder: {
          if (texturl.text !='Text Input')  {
              console.log('custom path =' + texturl.text)
-            fileDialog.folder=shortcuts.home
+            fileDialog.folder= shortcuts.home
+            texturl.text = shortcuts.home
          }
          else
          {  console.log('custom path =' + texturl.text)

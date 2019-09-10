@@ -43,11 +43,11 @@ Item {
        y: 40
        text: "D start"
        onClicked: {
-           download1.running
+           download1.running = true
             download1.start
-           download2.running
+           download2.running = true
             download2.start
-           download3.running
+           download3.running = true
             download3.start
        }
     }
@@ -57,7 +57,7 @@ Item {
        y: 80
        text: "Check path"
        onClicked: {
-            texturl.text= langswitch.getAppPath
+            texturl.text= langswitch.getnewAppPath
        }
     }
 
@@ -77,17 +77,24 @@ Item {
     Button {
        x: 280
        y: 40
-       text: " .. "
-       onClicked: folderDialog.open()
+       text: " Get. "
+       //onClicked: folderDialog.open()
+       onClicked: {
+           console.log('getnewapppath')
+           console.log('result cpp is ' + langswitch.getnewAppPath)
+           texturl.text=langswitch.getnewAppPath
+
+    }
     }
 
     Button {
        x: 360
        y: 40
-       text: "u.."
+       text: "Set.."
        onClicked: {
-        logEdit.text= folderDialog.folder + '\n' + logEdit.text
-        folder: texturl.text
+        //logEdit.text= folderDialog.folder + '\n' + logEdit.text
+        //folder: texturl.text
+           langswitch.setAppPath = texturl.text;
        }
     }
 
@@ -174,9 +181,10 @@ Item {
 
         url: "http://placehold.it/350x150"
         //destination: "file:///tmp/test.png"
-        destination: "file://" + langswitch.GetAppPath + "/test.png"
+        destination: "file://" + langswitch.getnewAppPath + "/test.png"
 
 //        running: true
+        running: false
 
         followRedirects: true
         onRedirected: console.log('Redirected',url,'->',redirectUrl)
@@ -194,10 +202,11 @@ Item {
 
         url: "ftp://speedtest.tele2.net/5MB.zip"
         //destination: "file:///tmp/QuickDownload_test.zip"
-        destination: "file://" + langswitch.GetAppPath + "/QuickDownload_test.zip"
+        destination: "file://" + langswitch.getnewAppPath + "/QuickDownload_test.zip"
 
         overwrite: true
 //        running: !download1.running
+        running: false
 
         onStarted: console.log('Started download',url)
         onError: console.error(errorString)
@@ -210,10 +219,10 @@ Item {
 
         url: "ftp://demo:password@test.rebex.net/readme.txt"
         //destination: "file:///tmp/QuickDownload_test_readme.txt"
-        destination: "file://" + langswitch.GetAppPath + "/QuickDownload_test_readme.txt"
+        destination: "file://" + langswitch.getnewAppPath + "/QuickDownload_test_readme.txt"
 
         overwrite: true
- //       running: true
+        running: false
 
         onStarted: console.log('Started download',url)
         onError: console.error(errorString)

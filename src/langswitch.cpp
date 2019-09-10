@@ -12,6 +12,13 @@ LangSwitch::LangSwitch(QObject *parent) :
 {
 }
 
+QString LangSwitch::getnewAppPath()
+{
+    qDebug() << "started getNewAppPath cpp function";
+    qDebug() << "App path : " << m_appPath;
+    return m_appPath;
+}
+
 QString LangSwitch::getAppPath()
 {
     qDebug() << "started getAppPath cpp function";

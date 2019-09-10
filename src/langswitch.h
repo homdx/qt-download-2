@@ -11,13 +11,14 @@ class LangSwitch: public QObject
     Q_PROPERTY(QString requestPermissions READ requestPermissions)
     //Q_PROPERTY(QString getAppPath READ getAppPath WRITE setAppPath)
     Q_PROPERTY(QString setAppPath WRITE setAppPath)
+    Q_PROPERTY(QString getnewAppPath READ getnewAppPath)
 
 public:
     explicit LangSwitch(QObject *parent = nullptr);
 
     QString userName();
     QString getAppPath();
-    //QString AppPathChange();
+    QString getnewAppPath();
     void setAppPath(const QString &appPathChange);
     void setUserName(const QString &userName);
     bool requestPermissions();

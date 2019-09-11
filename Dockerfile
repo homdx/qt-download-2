@@ -25,6 +25,6 @@ RUN export ANDROID_TARGET_SDK_VERSION=28 && \
     echo update translate files && lrelease ${profile} && \
     build-android-gradle-project ${profile} --debug && \
     echo copy result apk && \
-    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app
+    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
 
 CMD tail -f /var/log/faillog

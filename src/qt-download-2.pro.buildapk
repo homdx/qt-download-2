@@ -12,7 +12,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #if defined(Q_OS_ANDROID)
 //#QMAKE_LINK += '-nostdlib++'
 include (/android_openssl/openssl.pri)
-#QMAKE_LINK += ''
+#QMAKE_LINK += '-nostdlib++'
 android: QT += androidextras
 #elif defined(Q_OS_LINUX)
 QMAKE_LINK += ''

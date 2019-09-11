@@ -9,7 +9,7 @@ uri = com.blackgrain.qml.quickdownload
 //QMAKE_LINK += '-nostdlib++'
 
 #if defined(Q_OS_ANDROID)
-QMAKE_LINK += ''
+QMAKE_LINK += '-nostdlib++'
 #elif defined(Q_OS_LINUX)
 QMAKE_LINK += ''
 #elif defined(Q_OS_WIN)

@@ -4,7 +4,7 @@ import QtQuick.Controls 2.5
 import com.blackgrain.qml.quickdownload 1.0
 import io.qt.examples.langswitch 1.0
 
-import Qt.labs.platform 1.0
+import Qt.labs.platform 1.1
 import QtQuick.Dialogs 1.2
 
 

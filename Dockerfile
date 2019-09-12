@@ -8,7 +8,7 @@ FROM quay.io/homdx/qt-android-docker:513
 #    && echo "${ADBCACHE_HASH}  android.tar.gz" | sha512sum -c \
 #    && tar -xvf android.tar.gz \
 #    && ls -la android.tar.gz && cd ..
-ARG NDKVER=r19b
+ARG NDKVER=r19c
 ARG projname=qt-download-2
 ARG profile=qt-download-2.pro
 

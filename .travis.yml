@@ -3,6 +3,8 @@ services:
 - docker
 before_install:
 - mkdir localreg
+script:
+- mkdir -pv localreg
 - cd localreg
 - git clone https://github.com/homdx/qt-android-docker && cd qt-android-docker && git checkout 513
 - time docker build -t quay.io/homdx/qt-android-docker:513 .
@@ -11,7 +13,6 @@ before_install:
 - cd source
 - git clone https://github.com/homdx/qt-download-2
 - cd qt-download-2
-script:
 - docker build -t test .
 - mkdir apk
 - docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-download-2/apk:/app2 -d

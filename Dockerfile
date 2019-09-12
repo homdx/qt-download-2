@@ -12,7 +12,7 @@ ARG NDKVER=r19c
 ARG projname=qt-download-2
 ARG profile=qt-download-2.pro
 
-RUN cd / && git clone https://github.com/homdx/android_openssl.git && cd /android_openssl && echo git checkout 5.12.4_5.13.0 && mkdir -pv /app/${projname}
+RUN cat /usr/bin/build-android-gradle-project && cd / && git clone https://github.com/homdx/android_openssl.git && cd /android_openssl && echo git checkout 5.12.4_5.13.0 && mkdir -pv /app/${projname}
 
 ADD . /app/${projname}/
 

@@ -2,7 +2,11 @@ language: qml
 services:
 - docker
 before_install:
-- docker pull quay.io/homdx/qt-android-docker:513
+- mkdir localreg
+- cd localreg
+- git clone https://github.com/homdx/qt-android-docker && cd qt-android-docker && git checkout 513
+- time docker build -t quay.io/homdx/qt-android-docker:513 .
+- echo no need docker pull quay.io/homdx/qt-android-docker:513 && cd .. && rm -rvf localreg/
 - mkdir source
 - cd source
 - git clone https://github.com/homdx/qt-download-2

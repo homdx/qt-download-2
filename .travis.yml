@@ -15,7 +15,7 @@ script:
 - cd qt-download-2
 - docker build -t test .
 - mkdir apk
-- docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-download-2/apk:/app2 -d
+- docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-download-2/apk:/app2 -d test
 - docker exec -it test cp /app/android-build-debug.apk /app2/dev-preview.apk
 - ls -la apk
 - mv apk/dev-preview.apk $TRAVIS_BUILD_DIR

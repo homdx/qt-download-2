@@ -1,4 +1,6 @@
-FROM quay.io/homdx/qt-android-docker:513
+FROM homdx/qt-android-docker:5.13.1
+#Mirror
+#FROM quay.io/homdx/qt-android-docker:513
 
 #ARG ADBCACHE_VERSION=1.0.6
 #ARG ADBCACHE_HASH=f64ce7ec93b7dc78b0b3a0227a369604221c9bd2d54c33d1d3e1865d720a7351cc91a99008a4ea66ab799c8e76688f442bbc65c30255baae9497e9c67c6c5f0e

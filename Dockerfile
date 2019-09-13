@@ -2,14 +2,14 @@ FROM homdx/qt-android-docker:5.13.1
 #Mirror
 #FROM quay.io/homdx/qt-android-docker:513
 
-#ARG ADBCACHE_VERSION=1.0.6
-#ARG ADBCACHE_HASH=f64ce7ec93b7dc78b0b3a0227a369604221c9bd2d54c33d1d3e1865d720a7351cc91a99008a4ea66ab799c8e76688f442bbc65c30255baae9497e9c67c6c5f0e
-#ARG ADBCACHEFILE=android.tar.gz
+ARG ADBCACHE_VERSION=1
+ARG ADBCACHE_HASH=96f8bd9afd275ce9aa81c45e89c79db97155861df6665e508ff64e40b96a323e602578976d8256241993a239d3d1bc9648979bf12c91864140c5a9164c42c3b9
+ARG ADBCACHEFILE=android.tar.gz
 
-#RUN cd /root && set -ex && curl -s -L -o android.tar.gz https://github.com/homdx/qt-view/releases/download/${ADBCACHE_VERSION}/${ADBCACHEFILE} \
-#    && echo "${ADBCACHE_HASH}  android.tar.gz" | sha512sum -c \
-#    && tar -xvf android.tar.gz \
-#    && ls -la android.tar.gz && cd ..
+RUN cd /root && set -ex && curl -s -L -o android.tar.gz https://github.com/homdx/qt-download-2/releases/download/${ADBCACHE_VERSION}/${ADBCACHEFILE} \
+    && echo "${ADBCACHE_HASH}  android.tar.gz" | sha512sum -c \
+    && tar -xvf android.tar.gz \
+    && ls -la android.tar.gz && rm android.tar.gz && cd ..
 ARG NDKVER=r19c
 ARG projname=qt-download-2
 ARG profile=qt-download-2.pro
@@ -34,6 +34,5 @@ RUN export ANDROID_TARGET_SDK_VERSION=28 && \
     build-android-gradle-project ${profile} --debug && \
     echo copy result apk && \
     cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
-
 
 CMD tail -f /var/log/faillog

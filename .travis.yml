@@ -4,11 +4,11 @@ services:
 before_install:
 - mkdir localreg
 script:
-- mkdir -pv localreg
-- cd localreg
-- git clone https://github.com/homdx/qt-android-docker && cd qt-android-docker && git checkout 513
-- time docker build -t quay.io/homdx/qt-android-docker:513 .
-- echo no need docker pull quay.io/homdx/qt-android-docker:513 && cd .. && rm -rvf localreg/
+- ls -la localreg || echo not found && mkdir -pv localreg
+#- cd localreg
+#- git clone https://github.com/homdx/qt-android-docker && cd qt-android-docker && git checkout 513
+#- time docker build -t quay.io/homdx/qt-android-docker:513 .
+#- echo no need docker pull quay.io/homdx/qt-android-docker:513 && cd .. && rm -rvf localreg/
 - cd $TRAVIS_BUILD_DIR && mkdir source
 - cd source
 - git clone https://github.com/homdx/qt-download-2

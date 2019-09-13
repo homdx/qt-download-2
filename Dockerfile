@@ -45,7 +45,7 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-cd /Qt/5.13.1/Src && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release-nomake tests -nomake examples -no-compile-examples && \
+cd /Qt/5.13.1/Src && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples && \
 make -j4 && echo build done && echo build done && make install || echo error build
 
 CMD tail -f /var/log/faillog

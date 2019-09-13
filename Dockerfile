@@ -37,6 +37,15 @@ RUN export ANDROID_TARGET_SDK_VERSION=28 && \
 
 #COPY config.opt /Qt/5.13.1/config.opt
 
+ARG QT_VERSION=5.13.1
+ARG NDK_VERSION=r19c
+ARG ANDROID_SDK_ROOT=/android-sdk-linux
+
+ARG PATH="/Qt/$QT_VERSION/android_armv7/bin/:${PATH}"
+ARG ANDROID_NDK_ROOT="/android-ndk-$NDK_VERSION"
+ARG ANDROID_SDK_ROOT="/android-sdk-linux"
+ARG QT_HOME=/Qt/$QT_VERSION/
+
 RUN apt install build-essential g++ -y && \
 export NDK_VERSION=r19c && \
 export    ANDROID_NDK_ARCH=arch-arm c && \

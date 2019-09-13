@@ -35,4 +35,9 @@ RUN export ANDROID_TARGET_SDK_VERSION=28 && \
     echo copy result apk && \
     cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
 
+COPY config.opt /Qt/5.13.1/config.opt
+
+RUN apt install build-essential g++ -y && \
+     cd /Qt/5.13.1/Src && ./configure -android-arch armeabi-v7a && make -j4 && echo build done && echo build done && make install || echo error build
+
 CMD tail -f /var/log/faillog

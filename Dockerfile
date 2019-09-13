@@ -38,6 +38,13 @@ RUN export ANDROID_TARGET_SDK_VERSION=28 && \
 COPY config.opt /Qt/5.13.1/config.opt
 
 RUN apt install build-essential g++ -y && \
-     cd /Qt/5.13.1/Src && ./configure -android-arch armeabi-v7a && make -j4 && echo build done && echo build done && make install || echo error build
+export NDK_VERSION=r19c && \
+export    ANDROID_NDK_ARCH=arch-arm c && \
+export    ANDROID_NDK_EABI=llvm c && \ 
+export    ANDROID_NDK_HOST=linux-x86_64 c && \
+export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
+export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
+export DEBIAN_FRONTEND=noninteractive c && \
+cd /Qt/5.13.1/Src && ./configure -android-arch armeabi-v7a && make -j4 && echo build done && echo build done && make install || echo error build
 
 CMD tail -f /var/log/faillog

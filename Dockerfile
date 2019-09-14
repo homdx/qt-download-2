@@ -49,7 +49,7 @@ ARG QT_HOME=/Qt/$QT_VERSION/
 
 RUN apt install build-essential g++ -y && \
 apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \
-apt-get install libgles2-mesa-dev -y && \
+apt-get install libgles2-mesa-dev time -y && \
 export NDK_VERSION=r19c && \
 export    ANDROID_NDK_ARCH=arch-arm c && \
 export    ANDROID_NDK_EABI=llvm c && \ 

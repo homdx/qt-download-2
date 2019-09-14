@@ -13,6 +13,7 @@ script:
 - cd source
 - git clone https://github.com/homdx/qt-download-2
 - cd qt-download-2
+- date && docker pull homdx/qt-android-docker:5.13.1 && date
 - "travis_wait 30 sleep 1800 &"
 - docker build -t test .
 - mkdir apk

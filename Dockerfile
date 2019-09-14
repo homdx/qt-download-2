@@ -58,14 +58,12 @@ export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
 cd /Qt/5.13.1/Src && echo start build && date && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && \
-make -j4 && echo end build && date && echo build done && make install && cd /Qt/5.13.1/Src/qtbase/src/tools/androiddeployqt && make && make install || echo error build
+make -j4 --no-print-directory && echo end build && date && echo build done && make install && cd /Qt/5.13.1/Src/qtbase/src/tools/androiddeployqt && make && make install && rm -rf /Qt || echo error build
 
 RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
 
 ARG QT_VERSION=5.13.1
-ENV PATH="/usr/local/$QT_VERSION/android_armv7/bin/:${PATH}"
-ENV QT_HOME=/usr/local/$QT_VERSION/
-
-RUN rm -rf /Qt/
+ENV PATH="/usr/local/$Qt-QT_VERSION/android_armv7/bin/:${PATH}"
+ENV QT_HOME=/usr/local/Qt-$QT_VERSION/
 
 CMD tail -f /var/log/faillog

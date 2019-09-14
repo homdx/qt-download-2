@@ -14,7 +14,8 @@ script:
 - git clone https://github.com/homdx/qt-download-2
 - cd qt-download-2
 - date && docker pull homdx/qt-android-docker:5.13.1 && date
-- travis_wait 60 docker build -t test .
+#- travis_wait 60 
+- while sleep 60s; do echo \"=====[ $SECONDS seconds still running ]=====\"; done & docker build -t test . && echo done build docker && kill %1
 - mkdir apk
 - docker run --rm -it --name test -v $TRAVIS_BUILD_DIR/source/qt-download-2/apk:/app2 -d test
 - docker exec -it test cp /app/android-build-debug.apk /app2/dev-preview.apk

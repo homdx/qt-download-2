@@ -64,7 +64,7 @@ cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && wher
 git config --global user.email "you@example.com" && \
 git config --global user.name "Your Name" && \
 date >/1.txt && git add . && date >>/1.txt && git commit -m 'initial' --quiet && echo git init done >>/1.txt && date >>/1.txt && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
-git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && time tar -czvf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
+git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
 
 #RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
 

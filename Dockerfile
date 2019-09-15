@@ -60,11 +60,13 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
-echo wget https://github.com/homdx/qt-download-2/releases/download/3/make.tar.gz && echo tar -tf make.tar.gz && echo rm make.tar.gz && \
-make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && echo build done && make install && cd /Qt/${QT_VERSION}/Src/qtbase/src/tools/androiddeployqt && make && make install && cd /Qt/${QT_VERSION}/Src/qttools/src/linguist/lrelease && make && make install && echo rm -rf /Qt || echo error build
+cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && git init && \
+git config --global user.email "you@example.com" && \
+git config --global user.name "Your Name" && \
+date >/1.txt && git add . && date >>/1.txt && git commit -m 'initial' --quiet && echo git init done >>/1.txt && date >>/1.txt && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
+git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && time tar -czvf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
 
-RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
+#RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
 
 ARG QT_VERSION=5.13.1
 ENV PATH="/usr/local/5.13.1/android_armv7/bin/:${PATH}"

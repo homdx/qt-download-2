@@ -57,8 +57,8 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-cd /Qt/5.13.1/Src && echo start build && date && set && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
-make -j2 -s && echo end build && date && echo build done && make install && cd /Qt/5.13.1/Src/qtbase/src/tools/androiddeployqt && make && make install && rm -rf /Qt || echo error build
+cd /Qt/${QT_VERSION}/Src && echo start build && date && set && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
+make -j5 -s && echo end build && date && echo build done && make install && cd /Qt/${QT_VERSION}/Src/qtbase/src/tools/androiddeployqt && make && make install && cd /Qt/${QT_VERSION}/Src/qttools/src/linguist/lrelease && make && make install && rm -rf /Qt || echo error build
 
 RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
 
@@ -79,3 +79,4 @@ export ANDROID_NDK_HOME=/android-ndk-r19c && \
 cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && ls -la arm
 
 CMD tail -f /var/log/faillog
+

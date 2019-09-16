@@ -96,8 +96,7 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-export ANDROID_NDK_HOME=/android-ndk-r19c
-
+export ANDROID_NDK_HOME=/android-ndk-r19c && \
 cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && ls -la arm
 
 CMD tail -f /var/log/faillog

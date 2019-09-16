@@ -81,9 +81,10 @@ cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && wher
 git config --global user.email "you@example.com" && \
 git config --global user.name "Your Name" && \
 date >/1.txt && git add . && date >>/1.txt && git commit -m 'initial' --quiet && echo git init done >>/1.txt && date >>/1.txt && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath --recheck -openssl -I /android_openssl/openssl-1.1.1c/include -L /android_openssl/arm -openssl-linked  && echo configure done && \
-git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
+git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && echo time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt && \
 cd /Qt/${QT_VERSION}/Src && echo wget git && wget --quiet https://github.com/homdx/qt-download-2/releases/download/git-src1/gt-git.tar.gz && \
-tar -xf gt-git.tar.gz && rm gt-git.tar.gz && echo list dir && ls -la && echo list git dir && ls -la .git && git reset --hard && git status && echo start for build && \
+echo rm -rf .git && \
+echo tar -xf gt-git.tar.gz && rm gt-git.tar.gz && echo list dir && ls -la && echo list git dir && ls -la .git && echo git reset --hard && git status && echo start for build && \
 date >/1.txt && echo start build>>/1.txt && \
 #git config --global user.email "you@example.com" && \
 #git config --global user.name "Your Name" && \

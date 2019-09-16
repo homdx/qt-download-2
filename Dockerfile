@@ -91,6 +91,19 @@ date >/1.txt && echo start build>>/1.txt && \
 #git config --global user.name "Your Name" && \
 make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && date >>/1.txt && git add . && git commit -m 'compiled' --quiet && \
 echo commited >>/1.txt && date >>/1.txt && \
+date && \
+echo git fsck && \
+echo git fsck >>/1.txt && \
+date >>/1.txt && \
+git fsck && \
+echo git prune && \
+echo git prune >>/1.txt && \
+date >>/1.txt && \
+git gc --prune=now && \
+date >>1.txt && \
+date && \
+echo git prune done >>/1.txt && \
+echo done git prune && \
 time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
 
 RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin

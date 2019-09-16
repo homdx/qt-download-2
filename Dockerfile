@@ -66,7 +66,7 @@ ARG QT_HOME=/Qt/$QT_VERSION/
 #apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
 #ls -la arm
 
-RUN -rf /android_openssl && cd / && wget --quiet https://github.com/homdx/qt-download-2/releases/download/3/android_openssl.tar.gz && tar -xf android_openssl.tar.gz && rm android_openssl.tar.gz 
+RUN rm -rf /android_openssl && cd / && wget --quiet https://github.com/homdx/qt-download-2/releases/download/3/android_openssl.tar.gz && tar -xf android_openssl.tar.gz && rm android_openssl.tar.gz 
 
 RUN apt-get clean && apt install build-essential g++ -y && \
 apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \

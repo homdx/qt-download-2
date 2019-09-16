@@ -66,6 +66,7 @@ cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo star
 apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
 ls -la arm
 
+ARG QT_VERSION=5.13.1
 
 RUN apt install build-essential g++ -y && \
 apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \
@@ -77,7 +78,7 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath --recheck -openssl -I /android_openssl/openssl-1.1.1c/include -L /android_openssl/arm -openssl-linked && echo configure done && \
+cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath --recheck -openssl -I /android_openssl/openssl-1.1.1c/include -L /android_openssl/arm && echo configure done && \
 echo wget https://github.com/homdx/qt-download-2/releases/download/3/make.tar.gz && echo tar -tf make.tar.gz && echo rm make.tar.gz && \
 make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && echo build done && make install && cd /Qt/${QT_VERSION}/Src/qtbase/src/tools/androiddeployqt && make && make install && cd /Qt/${QT_VERSION}/Src/qttools/src/linguist/lrelease && make && make install && rm -rf /Qt && \
 apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done || echo error build

@@ -80,7 +80,7 @@ export DEBIAN_FRONTEND=noninteractive c && \
 cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && git init && \
 git config --global user.email "you@example.com" && \
 git config --global user.name "Your Name" && \
-date >/1.txt && git add . && date >>/1.txt && git commit -m 'initial' --quiet && echo git init done >>/1.txt && date >>/1.txt && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath --recheck -openssl -I /android_openssl/openssl-1.1.1c/include -L /android_openssl/arm -openssl-linked  && echo configure done && \
+date >/1.txt && git add . && date >>/1.txt && git commit -m 'initial' --quiet && echo git init done >>/1.txt && date >>/1.txt && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath --recheck -openssl -I /android_openssl/openssl-1.1.1c/include -L /android_openssl/arm && echo configure done && \
 git add . && git commit -m 'configure' --quiet && echo 'done commit configure' >>/1.txt && echo done commit configure && date >>/1.txt && echo time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt && \
 cd /Qt/${QT_VERSION}/Src && echo wget git && wget --quiet https://github.com/homdx/qt-download-2/releases/download/git-src1/gt-git.tar.gz && \
 echo rm -rf .git && \

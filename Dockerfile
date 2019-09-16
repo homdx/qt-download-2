@@ -29,12 +29,12 @@ RUN ls -la /android-sdk-linux && yes | /android-sdk-linux/tools/bin/sdkmanager -
     echo copy result apk && \
     cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
 
-RUN export ANDROID_TARGET_SDK_VERSION=28 && \
-    echo run && cp -vf ${profile}.buildapk ${profile} && \
-    echo update translate files && lrelease ${profile} && \
-    build-android-gradle-project ${profile} --debug && \
-    echo copy result apk && \
-    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
+#RUN export ANDROID_TARGET_SDK_VERSION=28 && \
+#    echo run && cp -vf ${profile}.buildapk ${profile} && \
+#    echo update translate files && lrelease ${profile} && \
+#    build-android-gradle-project ${profile} --debug && \
+#    echo copy result apk && \
+#    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
 
 #COPY config.opt /Qt/5.13.1/config.opt
 
@@ -49,23 +49,24 @@ ARG QT_HOME=/Qt/$QT_VERSION/
 
 #tar -czvf /make.tar.gz `find ./ -name Makefile`
 #ADD make.tar.gz /Qt/$QT_VERSION/Src
-COPY ssl.patch /android_openssl/ssl.patch
-RUN echo build OpenSSL from sources && \
-export NDK_VERSION=r19c && \
-export    ANDROID_NDK_ARCH=arch-arm c && \
-export    ANDROID_NDK_EABI=llvm c && \
-export    ANDROID_NDK_HOST=linux-x86_64 c && \
-export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
-export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
-export DEBIAN_FRONTEND=noninteractive c && \
-export ANDROID_NDK_HOME=/android-ndk-r19c && \
-apt install build-essential g++ -y && \
-apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \
-apt-get install libgles2-mesa-dev time -y && \
-cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
-apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
-ls -la arm
+#COPY ssl.patch /android_openssl/ssl.patch
+#RUN echo build OpenSSL from sources && \
+#export NDK_VERSION=r19c && \
+#export    ANDROID_NDK_ARCH=arch-arm c && \
+#export    ANDROID_NDK_EABI=llvm c && \
+#export    ANDROID_NDK_HOST=linux-x86_64 c && \
+#export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
+#export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
+#export DEBIAN_FRONTEND=noninteractive c && \
+#export ANDROID_NDK_HOME=/android-ndk-r19c && \
+#apt install build-essential g++ -y && \
+#apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \
+#apt-get install libgles2-mesa-dev time -y && \
+#cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
+#apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
+#ls -la arm
 
+RUN -rf /android_openssl && cd / && wget --quiet https://github.com/homdx/qt-download-2/releases/download/3/android_openssl.tar.gz && tar -xf android_openssl.tar.gz && rm android_openssl.tar.gz 
 
 RUN apt-get clean && apt install build-essential g++ -y && \
 apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \

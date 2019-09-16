@@ -68,6 +68,8 @@ export DEBIAN_FRONTEND=noninteractive c && \
 cd /Qt/${QT_VERSION}/Src && echo wget git && wget --quiet https://github.com/homdx/qt-download-2/releases/download/git-src1/gt-git.tar.gz && \
 tar -xf gt-git.tar.gz && rm gt-git.tar.gz && echo list dir && ls -la && echo list git dir && ls -la .git && git reset --hard && git status && echo start for build && \
 date >/1.txt && echo start build>>/1.txt && \
+git config --global user.email "you@example.com" && \
+git config --global user.name "Your Name" && \
 make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && date >>/1.txt && git add . && git commit -m 'compiled' --quiet && \
 time tar -czf /app/git.tar.gz .git/ && echo done tar >>/1.txt && echo done tar && date >>/1.txt
 
@@ -94,9 +96,9 @@ export    ANDROID_NDK_HOST=linux-x86_64 c && \
 export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
-export ANDROID_NDK_HOME=/android-ndk-r19c && \
+export ANDROID_NDK_HOME=/android-ndk-r19c
 
-#cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && ls -la arm
+cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && ls -la arm
 
 CMD tail -f /var/log/faillog
 

@@ -63,7 +63,7 @@ export DEBIAN_FRONTEND=noninteractive c && \
 cd /Qt/${QT_VERSION}/Src && echo start build && date && echo search make && whereis make && echo search qmake && whereis qmake && echo configure && ls -la && set +ex && ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r19c -xplatform android-clang -no-warnings-are-errors --disable-rpath && echo configure done && \
 echo wget https://github.com/homdx/qt-download-2/releases/download/3/make.tar.gz && echo tar -tf make.tar.gz && echo rm make.tar.gz && \
 make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && echo build done && make install && cd /Qt/${QT_VERSION}/Src/qtbase/src/tools/androiddeployqt && make && make install && cd /Qt/${QT_VERSION}/Src/qttools/src/linguist/lrelease && make && make install && rm -rf /Qt && \
-apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch install libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done || echo error build
+apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done || echo error build
 
 RUN mkdir -p /usr/local/Qt-5.13.1/android_armv7 && ln -s /usr/local/Qt-5.13.1/bin /usr/local/Qt-5.13.1/android_armv7/bin
 
@@ -94,7 +94,7 @@ apt install build-essential g++ -y && \
 apt-get install gcc git bison python gperf pkg-config gdb-multiarch -y && \
 apt-get install libgles2-mesa-dev time -y && \
 cd /android_openssl/ && git checkout master && patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
-apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch install libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
+apt-get remove build-essential g++ gcc git bison python gperf pkg-config gdb-multiarch libgles2-mesa-dev time -y && apt-get clean &&  echo clean up done && \
 ls -la arm
 
 CMD tail -f /var/log/faillog

@@ -89,7 +89,7 @@ echo tar -xf gt-git.tar.gz && rm gt-git.tar.gz && echo list dir && ls -la && ech
 date >/1.txt && echo start build>>/1.txt && \
 #git config --global user.email "you@example.com" && \
 #git config --global user.name "Your Name" && \
-make -j `grep -c '^processor' /proc/cpuinfo` -s && echo end build && date && date >>/1.txt && git add . && git commit -m 'compiled' --quiet && \
+echo make -j `grep -c '^processor' /proc/cpuinfo` -s && make -j5 -s && echo end build && date && date >>/1.txt && git add . && git commit -m 'compiled' --quiet && \
 echo commited >>/1.txt && date >>/1.txt && \
 date && \
 echo git fsck && \

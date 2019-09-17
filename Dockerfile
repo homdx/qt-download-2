@@ -99,7 +99,7 @@ git fsck && \
 echo git prune && \
 echo git prune >>/1.txt && \
 date >>/1.txt && \
-git gc --prune=now && \
+git gc --prune=now --force && \
 date >>1.txt && \
 date && \
 echo git prune done >>/1.txt && \

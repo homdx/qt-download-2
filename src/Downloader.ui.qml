@@ -43,12 +43,14 @@ Item {
        y: 40
        text: "D start"
        onClicked: {
-           download1.running = true
-            download1.start
+           //download1.running = true
+           // download1.start
+           download2.destination = langswitch.getnewAppPath + "/QuickDownload_test.zip"
+           console.log('QML url download is =' + download2.destination)
            download2.running = true
             download2.start
-           download3.running = true
-            download3.start
+           //download3.running = true
+           // download3.start
        }
     }
 
@@ -181,7 +183,11 @@ Item {
 
         url: "http://placehold.it/350x150"
         //destination: "file:///tmp/test.png"
-        destination: "file://" + langswitch.getnewAppPath + "/test.png"
+        destination: {
+
+                     "file://" + langswitch.getnewAppPath + "/test.png"
+            console.log (download1.destination);
+        }
 
 //        running: true
         running: false
@@ -202,7 +208,12 @@ Item {
 
         url: "ftp://speedtest.tele2.net/5MB.zip"
         //destination: "file:///tmp/QuickDownload_test.zip"
-        destination: "file://" + langswitch.getnewAppPath + "/QuickDownload_test.zip"
+        destination: {
+            console.log('change distanation QML');
+            "file://" + langswitch.getnewAppPath + "/QuickDownload_test.zip"
+            console.log (download1.destination);
+            console.log('changed distanation QML');
+        }
 
         overwrite: true
 //        running: !download1.running

@@ -1,0 +1,143 @@
+FROM debian:latest
+
+ARG QT_VERSION=5.13.1
+ARG NDK_VERSION=r19c
+ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
+ARG QT_PACKAGES="qt,qt.qt5.5131,qt.qt5.5131.gcc_64,qt.qt5.5131.android_armv7"
+ARG ANDROID_SDK_ROOT=/android-sdk-linux
+
+MAINTAINER HomDX
+
+RUN dpkg --add-architecture i386
+RUN apt-get update
+
+RUN apt-get install -y \
+	wget \
+	curl \
+	unzip \
+	git \
+	make \
+	lib32z1 \
+	lib32ncurses6 \
+	libbz2-1.0:i386 \
+	lib32stdc++6 \
+	&& apt-get clean
+
+#install dependencies for Qt installer
+RUN apt-get install -y \
+	libgl1-mesa-glx \
+	libglib2.0-0 \
+	&& apt-get clean
+
+#install dependencies for Qt modules
+RUN apt-get install -y \
+	libfontconfig1 \
+	libdbus-1-3 \
+	libx11-xcb1 \
+	libnss3-dev \
+	libasound2-dev \
+	libxcomposite1 \
+	libxrandr2 \
+	libxcursor-dev \
+	libegl1-mesa-dev \
+	libxi-dev \
+	libxss-dev \
+	libxtst6 \
+	libgl1-mesa-dev \
+	&& apt install apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common -y \
+        && wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - \
+        && add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
+        && apt update && apt install adoptopenjdk-8-hotspot -y \
+        && apt-get clean
+
+#Install CLANG
+RUN     wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - \
+	&& apt-add-repository --yes  "deb http://apt.llvm.org/buster/ llvm-toolchain-buster main" \
+	&& apt update && apt list --upgradable && apt-get upgrade -y && apt install clang-3.9 lldb -y \
+        && apt-get clean
+
+ENV VERBOSE=1
+ENV QT_CI_PACKAGES=$QT_PACKAGES
+
+#COPY install-android-sdk /tmp/install-android-sdk
+RUN wget https://raw.githubusercontent.com/homdx/qtci/513/bin/install-android-sdk --directory-prefix=/tmp \
+	&&  chmod u+rx /tmp/install-android-sdk \
+&& /tmp/install-android-sdk $SDK_INSTALL_PARAMS
+
+ARG ADBCACHE_VERSION=1
+ARG ADBCACHE_HASH=96f8bd9afd275ce9aa81c45e89c79db97155861df6665e508ff64e40b96a323e602578976d8256241993a239d3d1bc9648979bf12c91864140c5a9164c42c3b9
+ARG ADBCACHEFILE=android.tar.gz
+
+RUN cd /root && set -ex && curl -s -L -o android.tar.gz https://github.com/homdx/qt-download-2/releases/download/${ADBCACHE_VERSION}/${ADBCACHEFILE} \
+    && echo "${ADBCACHE_HASH}  android.tar.gz" | sha512sum -c \
+    && tar -xvf android.tar.gz \
+    && ls -la android.tar.gz && rm android.tar.gz && cd ..
+ARG NDKVER=r19c
+ARG projname=qt-download-2
+ARG profile=qt-download-2.pro
+
+
+RUN wget https://raw.githubusercontent.com/homdx/qtci/513/bin/build-android-gradle-project --directory-prefix=/root/ \
+        && chmod u+rx /root/build-android-gradle-project && ln -s /root/build-android-gradle-project /usr/bin/build-android-gradle-project
+
+ARG ADBCACHE_VERSION2=3
+ARG ADBCACHE_HASH2=4599f6c07b1cbbd9a94aa38df190c4904a59910d9233c7f8cdbecf3bbcfd44b78c093097c5d2dd25f43aad6cddf011f6a048947d69a98d02004c8dc41baa6c1d
+ARG ADBCACHEFILE2=Qt-5.13.1.tar.gz
+
+RUN cd /usr/local && set -ex && curl -s -L -o android.tar.gz https://github.com/homdx/qt-download-2/releases/download/${ADBCACHE_VERSION2}/${ADBCACHEFILE2} \
+    && echo "${ADBCACHE_HASH2}  android.tar.gz" | sha512sum -c \
+    && tar -xvf android.tar.gz \
+    && ls -la android.tar.gz && rm android.tar.gz
+
+ARG ADBCACHE_VERSION3=3
+ARG ADBCACHE_HASH3=513b8bbe33723741230b8c17643f88d29f4152591de21670d73c2381c22fd59e63501e2f1be6d7eb36589ebf570570c1d93c05aeaf24ca775acc304e87975fd7
+ARG ADBCACHEFILE3=android_openssl.tar.gz
+RUN cd / && set -ex && curl -s -L -o android.tar.gz https://github.com/homdx/qt-download-2/releases/download/${ADBCACHE_VERSION3}/${ADBCACHEFILE3} \
+    && echo "${ADBCACHE_HASH3}  android.tar.gz" | sha512sum -c \
+    && tar -xvf android.tar.gz \
+    && ls -la android.tar.gz && rm android.tar.gz
+
+ARG NDKVER=r19c
+ARG projname=qt-download-2
+ARG profile=qt-download-2.pro
+
+ADD . /app/${projname}/
+
+WORKDIR /app/${projname}/src
+
+ARG QT_VERSION=5.13.1
+ARG NDK_VERSION=r19c
+ARG ANDROID_SDK_ROOT=/android-sdk-linux
+
+ARG PATH="/usr/local/Qt-$QT_VERSION/android_armv7/bin/:${PATH}"
+ARG ANDROID_NDK_ROOT="/android-ndk-$NDK_VERSION"
+ARG ANDROID_SDK_ROOT="/android-sdk-linux"
+ARG QT_HOME=/usr/local/Qt-$QT_VERSION/
+
+ENV PATH="/usr/local/5.13.1/android_armv7/bin/:${PATH}"
+ENV QT_HOME=/usr/local/Qt-5.13.1/
+ENV NDK_VERSION=r19c
+ENV ANDROID_NDK_ARCH="arch-arm c"
+ENV ANDROID_NDK_EABI="llvm c"
+ENV ANDROID_NDK_HOST="linux-x86_64 c"
+ENV ANDROID_NDK_TOOLCHAIN_PREFIX="arm-linux-androideabi c"
+ENV ANDROID_NDK_TOOLCHAIN_VERSION="4.9 c"
+ENV DEBIAN_FRONTEND="noninteractive c"
+ENV ANDROID_NDK_HOME=/android-ndk-r19c
+
+RUN set && export PATH=/usr/local/Qt-5.13.1/android_armv7/bin:$PATH && ls -la /android-sdk-linux && yes | /android-sdk-linux/tools/bin/sdkmanager --licenses && \
+    export ANDROID_TARGET_SDK_VERSION=28 && \
+    echo run && cp -vf ${profile}.buildapk ${profile} && \
+    echo update translate files && lrelease ${profile} && \
+    build-android-gradle-project ${profile} --debug && \
+    echo copy result apk && \
+    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build
+
+RUN export ANDROID_TARGET_SDK_VERSION=28 && export PATH=/usr/local/Qt-5.13.1/android_armv7/bin:$PATH && \
+    echo run && cp -vf ${profile}.buildapk ${profile} && \
+    echo update translate files && lrelease ${profile} && \
+    build-android-gradle-project ${profile} --debug && \
+    echo copy result apk && \
+    cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error bu
+
+CMD tail -f /var/log/faillog

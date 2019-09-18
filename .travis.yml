@@ -9,11 +9,10 @@ script:
 #- git clone https://github.com/homdx/qt-android-docker && cd qt-android-docker && git checkout 513
 #- time docker build -t quay.io/homdx/qt-android-docker:513 .
 #- echo no need docker pull quay.io/homdx/qt-android-docker:513 && cd .. && rm -rvf localreg/
-- cd $TRAVIS_BUILD_DIR && mkdir source
-#- mv -v * -t source || echo not move source to source
-- cd source
-- git clone https://github.com/homdx/qt-download-2
-- cd qt-download-2 && git checkout dockerhub
+- cd $TRAVIS_BUILD_DIR && mkdir -pv source/qt-download-2 && mv -v * -t source/qt-download-2 || echo not move source to source
+- cd source/qt-download-2
+#- git clone https://github.com/homdx/qt-download-2
+#- cd qt-download-2 && git checkout dockerhub
 #- date && docker pull homdx/qt-sources:001-slim && date
 #- travis_wait 60 
 - cp -vf Dockerfile.prebuild Dockerfile && echo docker build && ./travis-docker.sh
@@ -36,3 +35,4 @@ deploy:
   skip_cleanup: true
   draft: true
   on:
+    all_branches: true

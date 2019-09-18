@@ -95,6 +95,8 @@ Item {
         //logEdit.text= folderDialog.folder + '\n' + logEdit.text
         //folder: texturl.text
            langswitch.setAppPath = texturl.text;
+//           console.log('return from cpp ' + langswitch.setAppPath(texturl.text));
+           console.log('return from cpp ');
        }
     }
 

@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
     qmlRegisterType<LangSwitch>("io.qt.examples.langswitch", 1, 0, "LangSwitch");
+
+
 //    qmlRegisterType<QuickDownload>("com.blackgrain.qml.quickdownload", 1, 0, "Download");
     return app.exec();
 }

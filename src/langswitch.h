@@ -19,7 +19,7 @@ public:
     QString userName();
     QString getAppPath();
     QString getnewAppPath();
-    void setAppPath(const QString &appPathChange);
+    QString setAppPath(const QString &appPathChange);
     void setUserName(const QString &userName);
     bool requestPermissions();
 
@@ -29,6 +29,8 @@ signals:
 private:
     QString m_userName;
     QString m_appPath;
+    QString mDataPath;
+    bool checkDirs();
 };
 
 #endif // LANGSWITCH_H

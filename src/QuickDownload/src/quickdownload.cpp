@@ -116,7 +116,7 @@ QUrl QuickDownload::url() const
 
 void QuickDownload::setUrl(const QUrl &url)
 {
-    qDebug() << "DEBUGTXT setUrl";
+    qDebug() << "DEBUGTXT setUrl " << url;
     if(_url != url) {
         _url = url;
         emit urlChanged();
@@ -235,6 +235,7 @@ void QuickDownload::start(QUrl url)
         _saveFile->cancelWriting();
     shutdownSaveFile();
     _saveFile = new QSaveFile(destination);
+    qDebug() << "DEBUGTXT destination file is " << destination;
     if (!_saveFile->open(QIODevice::WriteOnly)) {
         emit error(Error::ErrorDestination,_saveFile->errorString());
         shutdownSaveFile();

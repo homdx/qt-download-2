@@ -45,7 +45,9 @@ Item {
        onClicked: {
            //download1.running = true
            // download1.start
-           download2.destination = langswitch.getnewAppPath + "/QuickDownload_test.zip"
+           console.log('before cpp value is' + langswitch.getnewAppPath);
+           texturl.text = langswitch.getnewAppPath +  "/QuickDownload_test.zip";
+           download2.destination = texturl.text;
            console.log('QML url download is =' + download2.destination)
            download2.running = true
             download2.start
@@ -90,8 +92,7 @@ Item {
     }
 
     Button {
-       x: 360
-       y: 40
+       y: 80
        text: "Set.."
        onClicked: {
         //logEdit.text= folderDialog.folder + '\n' + logEdit.text
@@ -185,9 +186,10 @@ Item {
 
         url: "http://placehold.it/350x150"
         //destination: "file:///tmp/test.png"
+        overwrite: true
         destination: {
 
-                     "file://" + langswitch.getnewAppPath + "/test.png"
+              //       "file://" + langswitch.getnewAppPath + "/test.png"
             console.log (download1.destination);
         }
 

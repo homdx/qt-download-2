@@ -131,7 +131,7 @@ private:
     QUrl _destination;
     bool _followRedirects;
     bool _overwrite;
-
+    QString remove_qrc(QString url);
     QNetworkReply *_networkReply;
     void shutdownNetworkReply();
 

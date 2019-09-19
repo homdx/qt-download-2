@@ -219,6 +219,10 @@ void QuickDownload::start(QUrl url)
         return;
     }
 
+    qDebug() << "DEBUGTXT before setup qUrl is " << url;
+    //qDebug() << remove_qrc(url);
+    //qDebug() << "DEBUGTXT now start setup url ";
+    //setUrl(remove_qrc(url));
     setUrl(url);
 
     QString destination = _destination.toDisplayString(QUrl::PreferLocalFile);
@@ -234,8 +238,10 @@ void QuickDownload::start(QUrl url)
     if(_saveFile)
         _saveFile->cancelWriting();
     shutdownSaveFile();
-    _saveFile = new QSaveFile(destination);
     qDebug() << "DEBUGTXT destination file is " << destination;
+    qDebug() << "DEBUGTXT new destination file is " << remove_qrc(destination);
+    _saveFile = new QSaveFile(remove_qrc(destination));
+
     if (!_saveFile->open(QIODevice::WriteOnly)) {
         emit error(Error::ErrorDestination,_saveFile->errorString());
         shutdownSaveFile();
@@ -253,6 +259,15 @@ void QuickDownload::start(QUrl url)
     setProgress(0.0);
     setRunning(true);
     emit started();
+}
+
+QString QuickDownload::remove_qrc(QString url) {
+    //QString host = url.fileName();
+    if (url.startsWith("qrc:"))
+        qDebug() << "DEBUGTXT remove qrc from url";
+        url = url.mid(4); // = remove first 4 chars
+        qDebug() << "DEBUGTXT result qrc is " << url;
+    return url;
 }
 
 void QuickDownload::start()

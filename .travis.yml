@@ -11,6 +11,7 @@ script:
 #- echo no need docker pull quay.io/homdx/qt-android-docker:513 && cd .. && rm -rvf localreg/
 - cd $TRAVIS_BUILD_DIR && mkdir -pv source/qt-download-2 && mv -v * -t source/qt-download-2 || echo not move source to source
 - cd source/qt-download-2
+- echo Test my Default Docker build && date && docker build -t test -f Dockerfile.slim && echo Tested are ok and build is done && date
 #- git clone https://github.com/homdx/qt-download-2
 #- cd qt-download-2 && git checkout dockerhub
 #- date && docker pull homdx/qt-sources:001-slim && date

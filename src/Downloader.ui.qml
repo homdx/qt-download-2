@@ -209,7 +209,7 @@ Item {
 
     Download {
         id: download2
-
+        hashsum: 'f1e554807f6e927530f7461e2ed5e8e3509c0245e082b2db5c88763a3764d1278b88d0d220f8b7050a71b2677e463fb7a3ad1d5b0fe6588c6ff18fddf977864c'
         url: "ftp://speedtest.tele2.net/5MB.zip"
         //destination: "file:///tmp/QuickDownload_test.zip"
         destination: {

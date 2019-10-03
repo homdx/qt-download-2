@@ -1,7 +1,6 @@
 #include "QuickDownload/src/quickdownload.h"
 #include <QtDebug>
 
-
 #if defined(QUICKDOWNLOAD_AUTO_REGISTER)
 #include "register_quickdownload.h"
 #endif
@@ -121,6 +120,13 @@ void QuickDownload::setUrl(const QUrl &url)
         _url = url;
         emit urlChanged();
     }
+}
+
+void QuickDownload::setHashSum(const QByteArray &hashsum)
+{
+    qDebug() << "DEBUGTXT setHashSum " << hashsum;
+    _setHashSum = hashsum;
+
 }
 
 bool QuickDownload::running() const
@@ -384,11 +390,47 @@ void QuickDownload::shutdownNetworkReply()
     }
 }
 
+
+QByteArray QuickDownload::check_sum_file(const QString fileName,
+                        QCryptographicHash::Algorithm hashAlgorithm)
+{
+    qDebug() << "DEBUGTXT fileChecksum for file " << fileName << " and algorithm " << hashAlgorithm << " is started  ";
+    QFile f(fileName);
+    if (f.open(QFile::ReadOnly)) {
+        QCryptographicHash hash(hashAlgorithm);
+        if (hash.addData(&f)) {
+            qDebug() << "DEBUGTXT fileChecksum to HEX " << hash.result().toHex();
+            return hash.result().toHex();
+        }
+    }
+    return QByteArray();
+}
+
 void QuickDownload::shutdownSaveFile()
 {
     qDebug() << "DEBUGTXT shutdownSaveFile";
     if(_saveFile) {
         _saveFile->commit();
+        qDebug() << "DEBUGTXT shutdownSaveFile commited. Next check sum " << _saveFile->fileName();
+        if (_setHashSum.isNull()) {
+            qDebug() << "DEBUGTXT not defined HashSum for checking";
+                }
+        else
+        {
+            QByteArray result;
+            result = check_sum_file(_saveFile->fileName(), QCryptographicHash::Sha512);
+            //QString resulttxt = QTextCodec::codecForMib(1015)->toUnicode(result);
+            qDebug() << "DEBUGTXT result of checking raw " << result;
+            if ( _setHashSum == result ) {
+                qDebug() << "DEBUGTXT checksum is passed OK))))))";
+            }
+            else
+            {
+                qDebug() << "DEBUGTXT checksum is NOT PASSED (((((";
+            }
+         // qDebug() << "DEBUGTXT result of checking is " << resulttxt;
+        }
+        //check_sum_file(_saveFile->fileName(), QCryptographicHash::Sha512);
         delete _saveFile;
         _saveFile = 0;
     }

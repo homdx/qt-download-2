@@ -9,6 +9,7 @@
 #include <QSaveFile>
 #include <QFileInfo>
 #include <QDir>
+#include <QCryptographicHash>
 
 #include "qqml.h"
 
@@ -58,6 +59,7 @@ class QuickDownload : public QObject, public QQmlParserStatus
     Q_DISABLE_COPY(QuickDownload)
 
     Q_PROPERTY(QUrl url READ url WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(QByteArray hashsum WRITE setHashSum)
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
     Q_PROPERTY(qreal progress READ progress NOTIFY progressChanged)
     Q_PROPERTY(QUrl destination READ destination WRITE setDestination NOTIFY destinationChanged)
@@ -79,7 +81,7 @@ public:
 
     QUrl url() const;
     void setUrl(const QUrl &url);
-
+    void setHashSum(const QByteArray &hashsum);
     bool running() const;
     void setRunning(bool running);
 
@@ -93,6 +95,7 @@ public:
 
     bool overwrite() const;
     void setOverwrite(bool overwrite);
+    QByteArray hashsum() const;
 
     void classBegin() {}
     void componentComplete();
@@ -117,6 +120,8 @@ public slots:
     void start(QUrl url);
     void start();
     void stop();
+    QByteArray check_sum_file(const QString fileName,
+                              QCryptographicHash::Algorithm hashAlgorithm);
 
 private slots:
     void onReadyRead();
@@ -137,7 +142,9 @@ private:
 
     QSaveFile *_saveFile;
     void shutdownSaveFile();
-
+    QByteArray _setHashSum;
+    //QByteArray fileChecksum(const QString &fileName,
+    //                        QCryptographicHash::Algorithm hashAlgorithm);
     bool _componentComplete;
 };
 

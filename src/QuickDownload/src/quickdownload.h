@@ -125,6 +125,7 @@ public slots:
     QByteArray check_sum_file(const QString fileName,
                               QCryptographicHash::Algorithm hashAlgorithm);
     QByteArray check_sum_file_sha512(const QString fileName);
+    QString remove_qrc(QString url);
 
 private slots:
     void onReadyRead();
@@ -139,7 +140,6 @@ private:
     QUrl _destination;
     bool _followRedirects;
     bool _overwrite;
-    QString remove_qrc(QString url);
     QNetworkReply *_networkReply;
     void shutdownNetworkReply();
 

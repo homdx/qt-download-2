@@ -33,7 +33,7 @@ Item {
 
         width: parent.width-120
         height: 20
-        text: qsTr("Text Input")
+        text: qsTr("/storage/emulated/0/download")
         font.pixelSize: 18
     }
 
@@ -246,7 +246,8 @@ Item {
          if (hashsumresult == '0b3af23ea69818b8666cc218b0285964b400172ad6db755cd7b6952baa80de5ecc26df971724131736675c13444262742070a45012c1008a2b434e2a7bcfece6')
         {
           console.log('checksum is ok');
-          logEdit.text = 'file checksum is [OK] :)))) \n\n' + logEdit.text
+          logEdit.text = 'file checksum is [OK] :)))) \nAnd launch ' + langswitch.getnewAppPath + '\n' + logEdit.text
+          logEdit.text = 'And launch 2 ' + remove_qrc(langswitch.getnewAppPath) + '\n' + logEdit.text
           Qt.openUrlExternally(langswitch.getnewAppPath);
         }
          else

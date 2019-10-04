@@ -118,7 +118,7 @@ Item {
         id: fileDialog
         title: "Please choose a file"
         folder: {
-         if (texturl.text !='Text Input')  {
+         if (texturl.text !='/storage/emulated/0/download')  {
              console.log('custom path =' + texturl.text)
             fileDialog.folder= shortcuts.home
             texturl.text = shortcuts.home
@@ -138,7 +138,7 @@ Item {
             console.log("Canceled")
             //Qt.quit()
         }
-        Component.onCompleted: visible = true
+        Component.onCompleted: visible = false
     }
 
     Button {

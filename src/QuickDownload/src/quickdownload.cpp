@@ -391,6 +391,11 @@ void QuickDownload::shutdownNetworkReply()
     }
 }
 
+QByteArray QuickDownload::check_sum_file_sha512(const QString fileName)
+{
+    return check_sum_file(fileName,QCryptographicHash::Sha512);
+}
+
 
 QByteArray QuickDownload::check_sum_file(const QString fileName,
                         QCryptographicHash::Algorithm hashAlgorithm)

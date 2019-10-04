@@ -7,7 +7,6 @@ import io.qt.examples.langswitch 1.0
 import Qt.labs.platform 1.1
 import QtQuick.Dialogs 1.2
 
-
 Item {
 
 
@@ -203,7 +202,6 @@ Item {
         onError: console.error(errorString)
         onProgressChanged: console.log(url,'progress:',progress)
         onFinished: console.info(url,'done')
-
     }
 
 
@@ -217,6 +215,9 @@ Item {
             "file://" + langswitch.getnewAppPath + "/QuickDownload_test.zip"
             console.log (download1.destination);
             console.log('changed distanation QML');
+//         runningChanged.: {
+//                logEdit.text= download2.progress + '\n' + logEdit.text;
+//            }
         }
 
         overwrite: true
@@ -225,8 +226,37 @@ Item {
 
         onStarted: console.log('Started download',url)
         onError: console.error(errorString)
-        onProgressChanged: console.log(url,'progress:',progress)
-        onFinished: console.info(url,'done')
+        onProgressChanged: {
+            console.log(url,'progress:',progress);
+            progressBar.value=progress;
+            //logEdit.text= progress + ' progress\n' + logEdit.text;
+        }
+        onFinished: {
+              console.log(url,'qml download is done-qml onFineshed function hash =' + download2.hashsum);
+            // 6 = QCryptographicHash::Sha512
+         console.log('checksum returned is ' + check_sum_file_sha512(download2.destination));
+         console.log('original summ is ' + download2.hashsum);
+         if (check_sum_file_sha512(download2.destination) == download2.hashsum)
+        {
+          console.log('checksum is ok');
+        }
+         else
+        {
+          console.log('checksum not ok');
+        }
+    }
+}
+
+    ProgressBar {
+        id: progressBar
+        x: 111
+        y: 367
+        width: parent.width
+        height: 16
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        value: 0.0
     }
 
     Download {

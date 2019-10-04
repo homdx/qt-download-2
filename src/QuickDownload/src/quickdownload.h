@@ -57,7 +57,6 @@ class QuickDownload : public QObject, public QQmlParserStatus
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
     Q_DISABLE_COPY(QuickDownload)
-
     Q_PROPERTY(QUrl url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QByteArray hashsum WRITE setHashSum)
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
@@ -78,7 +77,7 @@ public:
 
     QuickDownload(QObject *parent = 0);
     ~QuickDownload();
-
+    //QByteArray check_sum_file_sha512(const QString fileName);
     QUrl url() const;
     void setUrl(const QUrl &url);
     void setHashSum(const QByteArray &hashsum);
@@ -116,12 +115,14 @@ signals:
     void error(int errorCode, QString errorString);
     void networkAccessManagerChanged();
 
+
 public slots:
     void start(QUrl url);
     void start();
     void stop();
     QByteArray check_sum_file(const QString fileName,
                               QCryptographicHash::Algorithm hashAlgorithm);
+    QByteArray check_sum_file_sha512(const QString fileName);
 
 private slots:
     void onReadyRead();

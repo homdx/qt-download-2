@@ -21,6 +21,7 @@ RUN set && export PATH=/usr/local/Qt-5.13.1/android_armv7/bin:$PATH && ls -la /a
     export ANDROID_TARGET_SDK_VERSION=28 && \
     echo run && cp -vf ${profile}.buildapk ${profile} && \
     echo update translate files && lrelease ${profile} && \
+    rm -rvf android-build && \
     build-android-gradle-project ${profile} --debug && \
     echo copy result apk && \
     cp -vf android-build/build/outputs/apk/debug/android-build-debug.apk /app || echo error build

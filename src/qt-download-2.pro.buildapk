@@ -69,8 +69,8 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
     QT += androidextras
-    SOURCES += cpp/android/androidshareutils.cpp
-    HEADERS += cpp/android/androidshareutils.hpp
+    SOURCES += $$PWD/cpp/android/androidshareutils.cpp
+    HEADERS += $$PWD/cpp/android/androidshareutils.hpp
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }
 

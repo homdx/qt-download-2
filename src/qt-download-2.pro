@@ -34,6 +34,11 @@ SOURCES += \
         langswitch.cpp \
         main.cpp
 
+# can be placed under android only, but I prefer to see them always
+OTHER_FILES += android/src/org/ekkescorner/utils/QShareUtils.java \
+    android/src/org/ekkescorner/examples/sharex/QShareActivity.java \
+    android/src/org/ekkescorner/utils/QSharePathResolver.java
+
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -48,6 +53,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    cpp/android/androidshareutils.hpp \
     langswitch.h
 DISTFILES += \
     android/AndroidManifest.xml \
@@ -56,9 +62,14 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew.bat \
+    android/res/values/file_provider_paths.xml \
     android/res/values/libs.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
+    QT += androidextras
+    SOURCES += cpp/android/androidshareutils.cpp
+    HEADERS += cpp/android/androidshareutils.hpp
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }

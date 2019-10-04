@@ -270,11 +270,24 @@ void QuickDownload::start(QUrl url)
 
 QString QuickDownload::remove_qrc(QString url) {
     //QString host = url.fileName();
+       if (url.length()>4) {
     if (url.startsWith("qrc:"))
+    {
         qDebug() << "DEBUGTXT remove qrc from url";
         url = url.mid(4); // = remove first 4 chars
         qDebug() << "DEBUGTXT result qrc is " << url;
+       }
+}
+   if (url.length()>7) {
+    if (url.startsWith("file://"))
+    {
+        qDebug() << "DEBUGTXT remove file:/// from url";
+        url = url.mid(7); // = remove first 4 chars
+        qDebug() << "DEBUGTXT result file:/// is " << url;
+       }
+   }
     return url;
+
 }
 
 void QuickDownload::start()
@@ -393,15 +406,22 @@ void QuickDownload::shutdownNetworkReply()
 
 QByteArray QuickDownload::check_sum_file_sha512(const QString fileName)
 {
-    return check_sum_file(fileName,QCryptographicHash::Sha512);
+    _getHashSum = check_sum_file(fileName,QCryptographicHash::Sha512);
+    qDebug() << "DEBUGTXT check_sum_file_sha512 = " <<_getHashSum << " it is hash and file name is " << fileName ;
+    return _getHashSum;
 }
 
+QByteArray QuickDownload::getHashSum() const
+{
+qDebug() << "DEBUGTXT getHashSum = " <<_getHashSum << " it is hash";
+return _getHashSum;
+}
 
 QByteArray QuickDownload::check_sum_file(const QString fileName,
                         QCryptographicHash::Algorithm hashAlgorithm)
 {
-    qDebug() << "DEBUGTXT fileChecksum for file " << fileName << " and algorithm " << hashAlgorithm << " is started  ";
-    QFile f(fileName);
+    qDebug() << "DEBUGTXT fileChecksum for file " << fileName << " remove qrc=" << remove_qrc(fileName) << " and algorithm " << hashAlgorithm << " is started  ";
+    QFile f(remove_qrc(fileName));
     if (f.open(QFile::ReadOnly)) {
         QCryptographicHash hash(hashAlgorithm);
         if (hash.addData(&f)) {

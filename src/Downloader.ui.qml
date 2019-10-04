@@ -46,6 +46,7 @@ Item {
            // download1.start
            console.log('before cpp value is' + langswitch.getnewAppPath);
            texturl.text = langswitch.getnewAppPath +  "/QuickDownload_test.zip";
+           langswitch.setAppPath = texturl.text;
            download2.destination = texturl.text;
            console.log('QML url download is =' + download2.destination)
            download2.running = true
@@ -61,6 +62,7 @@ Item {
        text: "Check path"
        onClicked: {
             texturl.text= langswitch.getnewAppPath
+           logEdit.text = download2.hashsum + '\n' + logEdit.text
        }
     }
 
@@ -198,7 +200,9 @@ Item {
         followRedirects: true
         onRedirected: console.log('Redirected',url,'->',redirectUrl)
 
-        onStarted: console.log('Started download',url)
+        onStarted: {
+            console.log('Started download',url);
+        }
         onError: console.error(errorString)
         onProgressChanged: console.log(url,'progress:',progress)
         onFinished: console.info(url,'done')
@@ -213,7 +217,7 @@ Item {
         destination: {
             console.log('change distanation QML');
             "file://" + langswitch.getnewAppPath + "/QuickDownload_test.zip"
-            console.log (download1.destination);
+            console.log (download2.destination);
             console.log('changed distanation QML');
 //         runningChanged.: {
 //                logEdit.text= download2.progress + '\n' + logEdit.text;
@@ -232,17 +236,21 @@ Item {
             //logEdit.text= progress + ' progress\n' + logEdit.text;
         }
         onFinished: {
-              console.log(url,'qml download is done-qml onFineshed function hash =' + download2.hashsum);
+              console.log(url,'qml download is done-qml onFineshed function hash =' + download2.hashsum.toString() + ' for file=' + langswitch.getnewAppPath);
             // 6 = QCryptographicHash::Sha512
-         console.log('checksum returned is ' + check_sum_file_sha512(download2.destination));
+         //console.log('checksum returned is ' + check_sum_file_sha512(download2.destination));
+         console.log('checksum returned is ' + check_sum_file_sha512(langswitch.getnewAppPath));
+         console.log('read result with hashsumresult is = ' + hashsumresult)
          console.log('original summ is ' + download2.hashsum);
-         if (check_sum_file_sha512(download2.destination) == download2.hashsum)
+         if (hashsumresult == 'f1e554807f6e927530f7461e2ed5e8e3509c0245e082b2db5c88763a3764d1278b88d0d220f8b7050a71b2677e463fb7a3ad1d5b0fe6588c6ff18fddf977864c')
         {
           console.log('checksum is ok');
+          logEdit.text = 'file checksum is [OK] :)))) \n\n' + logEdit.text
         }
          else
         {
           console.log('checksum not ok');
+          logEdit.text = 'ERROR file checksum is not OK :(((( \n\n' + logEdit.text
         }
     }
 }

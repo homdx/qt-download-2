@@ -59,6 +59,7 @@ class QuickDownload : public QObject, public QQmlParserStatus
     Q_DISABLE_COPY(QuickDownload)
     Q_PROPERTY(QUrl url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QByteArray hashsum WRITE setHashSum)
+    Q_PROPERTY(QByteArray hashsumresult READ getHashSum)
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
     Q_PROPERTY(qreal progress READ progress NOTIFY progressChanged)
     Q_PROPERTY(QUrl destination READ destination WRITE setDestination NOTIFY destinationChanged)
@@ -95,6 +96,7 @@ public:
     bool overwrite() const;
     void setOverwrite(bool overwrite);
     QByteArray hashsum() const;
+    QByteArray getHashSum() const;
 
     void classBegin() {}
     void componentComplete();
@@ -144,6 +146,7 @@ private:
     QSaveFile *_saveFile;
     void shutdownSaveFile();
     QByteArray _setHashSum;
+    QByteArray _getHashSum;
     //QByteArray fileChecksum(const QString &fileName,
     //                        QCryptographicHash::Algorithm hashAlgorithm);
     bool _componentComplete;

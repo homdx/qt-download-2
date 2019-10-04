@@ -181,6 +181,7 @@ void QuickDownload::setDestination(const QUrl &destination)
             QString newDestination = _destination.toDisplayString(QUrl::PreferLocalFile);
             if(_saveFile->fileName() != newDestination)
                 _saveFile->setFileName(newDestination);
+            qDebug() <<  "DEBUGTXT setDestination filenameis file =" << _saveFile->fileName();
         }
         emit destinationChanged();
     }

@@ -35,6 +35,7 @@ deploy:
 #    - git.tar.gz
   prerelease: true
   skip_cleanup: true
-  draft: true
+#  draft: true
+  draft: false
   on:
     all_branches: true

@@ -411,8 +411,9 @@ void QuickDownload::shutdownSaveFile()
 {
     qDebug() << "DEBUGTXT shutdownSaveFile";
     if(_saveFile) {
+        qDebug() << "DEBUGTXT shutdownSaveFile=" << _saveFile->fileName();
         _saveFile->commit();
-        qDebug() << "DEBUGTXT shutdownSaveFile commited. Next check sum " << _saveFile->fileName();
+        qDebug() << "DEBUGTXT shutdownSaveFile commited";
         if (_setHashSum.isNull()) {
             qDebug() << "DEBUGTXT not defined HashSum for checking";
                 }

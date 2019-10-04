@@ -248,7 +248,7 @@ Item {
           console.log('checksum is ok');
           logEdit.text = 'file checksum is [OK] :)))) \nAnd launch ' + langswitch.getnewAppPath + '\n' + logEdit.text
           logEdit.text = 'And launch 2 ' + remove_qrc(langswitch.getnewAppPath) + '\n' + logEdit.text
-          Qt.openUrlExternally(langswitch.getnewAppPath);
+          Qt.openUrlExternally(remove_qrc(langswitch.getnewAppPath));
         }
          else
         {

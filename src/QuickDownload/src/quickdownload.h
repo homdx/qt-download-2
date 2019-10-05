@@ -65,6 +65,8 @@ class QuickDownload : public QObject, public QQmlParserStatus
     Q_PROPERTY(QUrl destination READ destination WRITE setDestination NOTIFY destinationChanged)
     Q_PROPERTY(bool followRedirects READ followRedirects WRITE setFollowRedirects NOTIFY followRedirectsChanged)
     Q_PROPERTY(bool overwrite READ overwrite WRITE setOverwrite NOTIFY overwriteChanged)
+    Q_PROPERTY(QString InstallApp WRITE InstallApp)
+
 
 public:
     enum Error
@@ -97,6 +99,7 @@ public:
     void setOverwrite(bool overwrite);
     QByteArray hashsum() const;
     QByteArray getHashSum() const;
+    void InstallApp(const QString &appPackageName);
 
     void classBegin() {}
     void componentComplete();

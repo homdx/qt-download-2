@@ -94,12 +94,15 @@ Item {
 
     Button {
        y: 80
-       text: "Set.."
+       text: "@apk"
        onClicked: {
         //logEdit.text= folderDialog.folder + '\n' + logEdit.text
         //folder: texturl.text
-           langswitch.setAppPath = texturl.text;
+           Qt.openUrlExternally(texturl.text);
+           download2.InstallApp=texturl.text.toString();
+           //langswitch.setAppPath = texturl.text;
 //           console.log('return from cpp ' + langswitch.setAppPath(texturl.text));
+           logEdit.text= 'done\n' + logEdit.text;
            console.log('return from cpp ');
        }
     }
@@ -248,7 +251,7 @@ Item {
           console.log('checksum is ok');
           logEdit.text = 'file checksum is [OK] :)))) \nAnd launch ' + langswitch.getnewAppPath + '\n' + logEdit.text
           logEdit.text = 'And launch 2 ' + remove_qrc(langswitch.getnewAppPath) + '\n' + logEdit.text
-          Qt.openUrlExternally(remove_qrc(langswitch.getnewAppPath));
+          //Qt.openUrlExternally(remove_qrc(langswitch.getnewAppPath));
         }
          else
         {

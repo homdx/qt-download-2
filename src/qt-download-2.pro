@@ -59,7 +59,8 @@ DISTFILES += \
     android/gradlew \
     android/gradlew.bat \
     android/res/values/libs.xml \
-    android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java
+    android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java \
+    android/res/xml/filepaths.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \

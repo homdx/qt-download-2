@@ -98,7 +98,7 @@ Item {
        onClicked: {
         //logEdit.text= folderDialog.folder + '\n' + logEdit.text
         //folder: texturl.text
-           Qt.openUrlExternally(texturl.text);
+           //Qt.openUrlExternally(texturl.text);
            download2.InstallApp=texturl.text.toString();
            //langswitch.setAppPath = texturl.text;
 //           console.log('return from cpp ' + langswitch.setAppPath(texturl.text));

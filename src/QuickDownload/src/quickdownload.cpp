@@ -5,10 +5,10 @@
 #include "register_quickdownload.h"
 #endif
 
-#ifdef Q_OS_ANDROID
+//#ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
 const static char* MY_JAVA_CLASS = "org.qtproject.qtdownlod2/AndroidIntentLauncher";
-#endif /* Q_OS_ANDROID */
+//#endif /* Q_OS_ANDROID */
 
 QuickDownloadMaster *QuickDownloadMaster::self = 0;
 

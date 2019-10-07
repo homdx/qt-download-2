@@ -31,8 +31,10 @@ QMAKE_LINK += ''
 include(QuickDownload/quickdownload.pri)
 
 SOURCES += \
+        androidshareutils.cpp \
         langswitch.cpp \
-        main.cpp
+        main.cpp \
+        shareutils.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,7 +52,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    langswitch.h
+    androidshareutils.hpp \
+    langswitch.h \
+    shareutils.hpp
 DISTFILES += \
     android/AndroidManifest.xml \
     android/build.gradle \
@@ -60,7 +64,9 @@ DISTFILES += \
     android/gradlew.bat \
     android/res/values/libs.xml \
     android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java \
-    android/res/xml/filepaths.xml
+    android/res/xml/filepaths.xml \
+    android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
+    android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \

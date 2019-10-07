@@ -231,16 +231,21 @@ public class QShareUtils
 
         // using v4 support library create the Intent from ShareCompat
         // Intent sendIntent = new Intent();
+        Log.d("JAVA", "sendFile " + filePath + " - " + title + " - " + mimeType + " int=" +  requestId);
         Intent sendIntent = ShareCompat.IntentBuilder.from(QtNative.activity()).getIntent();
+        Log.d("JAVA 2","2");
         sendIntent.setAction(Intent.ACTION_SEND);
-
+Log.d("JAVA 3","3");
         File imageFileToShare = new File(filePath);
-
+Log.d("JAVA 4","4");
         // Using FileProvider you must get the URI from FileProvider using your AUTHORITY
         // Uri uri = Uri.fromFile(imageFileToShare);
+        Log.d("JAVA 5","5");
         Uri uri;
         try {
+            Log.d("JAVA 6","6");
             uri = FileProvider.getUriForFile(QtNative.activity(), AUTHORITY, imageFileToShare);
+            Log.d("JAVA 7","7");
         } catch (IllegalArgumentException e) {
             Log.d("ekkescorner sendFile - cannot be shared: ", filePath);
             return false;

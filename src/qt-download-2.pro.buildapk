@@ -31,15 +31,17 @@ QMAKE_LINK += ''
 include(QuickDownload/quickdownload.pri)
 
 SOURCES += \
+        applicationui.cpp \
         langswitch.cpp \
         main.cpp \
         shareutils.cpp
 
 RESOURCES += qml.qrc \
-             data_assets.qrc
+            data_assets.qrc
 
-
-OTHER_FILES += $$PWD/android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java
+OTHER_FILES +=     android/src/org/qtproject/qtdownlod2/QShareActivity.java \
+    android/src/org/qtproject/utils/QSharePathResolver.java \
+    android/src/org/qtproject/utils/QShareUtils.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -66,15 +68,14 @@ DISTFILES += \
     android/gradlew \
     android/gradlew.bat \
     android/res/values/libs.xml \
-    android/res/xml/filepaths.xml \
-    android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
-    android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java \
-    android/src/org/qtproject/qtdownlod2/examples/sharex/QShareActivity.java
-
-
+    android/res/xml/filepaths.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android 
+
+    SOURCES += androidshareutils.cpp
+
+    HEADERS += androidshareutils.hpp
 
 }

@@ -13,7 +13,7 @@
 //
 // see also /COPYRIGHT and /LICENSE
 
-package org.qtproject.qtdownlod2.examples.sharex;
+package org.qtproject.qtdownlod2;
 
 import org.qtproject.qt5.android.QtNative;
 
@@ -31,8 +31,6 @@ import android.content.ContentResolver;
 import android.webkit.MimeTypeMap;
 
 import org.qtproject.utils.*;
-
-
 
 public class QShareActivity extends QtActivity
 {

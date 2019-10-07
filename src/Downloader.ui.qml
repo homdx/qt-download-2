@@ -99,11 +99,13 @@ Item {
         //logEdit.text= folderDialog.folder + '\n' + logEdit.text
         //folder: texturl.text
            //Qt.openUrlExternally(texturl.text);
-           download2.InstallApp=texturl.text.toString();
+           shareUtils.share("Qt","http://qt.io");
+           console.log('return from cpp ');
+           //download2.InstallApp=texturl.text.toString();
            //langswitch.setAppPath = texturl.text;
 //           console.log('return from cpp ' + langswitch.setAppPath(texturl.text));
            logEdit.text= 'done\n' + logEdit.text;
-           console.log('return from cpp ');
+
        }
     }
 

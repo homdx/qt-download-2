@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "QuickDownload/src/quickdownload.h"
 #include "langswitch.h"
+#include "applicationui.hpp"
 
 int main(int argc, char *argv[])
 {

@@ -32,6 +32,7 @@ include(QuickDownload/quickdownload.pri)
 
 SOURCES += \
         androidshareutils.cpp \
+        applicationui.cpp \
         langswitch.cpp \
         main.cpp \
         shareutils.cpp
@@ -53,6 +54,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     androidshareutils.hpp \
+    applicationui.hpp \
     langswitch.h \
     shareutils.hpp
 DISTFILES += \

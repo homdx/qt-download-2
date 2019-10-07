@@ -7,6 +7,8 @@
 
 #include <QQmlContext>
 
+#include "applicationui.hpp"
+
 #include "QuickDownload/src/quickdownload.h"
 #include "langswitch.h"
 

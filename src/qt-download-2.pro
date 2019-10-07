@@ -65,7 +65,6 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew.bat \
-    android/res/values/libs.xml \
     android/res/xml/filepaths.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {

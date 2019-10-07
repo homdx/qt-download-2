@@ -1,3 +1,4 @@
+#FROM homdx/qt-android-docker:5.13.1
 FROM homdx/qt-sources:001-slim
 
 ARG ADBCACHE_VERSION=1.0.6

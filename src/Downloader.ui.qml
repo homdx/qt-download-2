@@ -102,11 +102,19 @@ Item {
             //shareUtils.share("Qt","http://qt.io");
             //shareUtils.share("Qt", texturl.text)
 
+
+            if (Qt.platform.os === "android")
+            {
             shareUtils.viewFile(texturl.text, "View File",
                                 "application/vnd.android.package-archive",
                                 request_VIEW_FILE_PDF, appWindow.useAltImpl)
-
-            console.log('return from cpp ')
+}
+            else
+            {
+                console.log('not android platform');
+             logEdit.text = 'Not android platform\n' + logEdit.text;
+            }
+            console.log('return from cpp ');
             //download2.InstallApp=texturl.text.toString();
             //langswitch.setAppPath = texturl.text;
             //           console.log('return from cpp ' + langswitch.setAppPath(texturl.text));

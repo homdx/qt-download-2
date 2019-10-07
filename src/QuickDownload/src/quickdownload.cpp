@@ -5,6 +5,11 @@
 #include "register_quickdownload.h"
 #endif
 
+#ifdef Q_OS_ANDROID
+#include <QAndroidJniObject>
+const static char* MY_JAVA_CLASS = "org.qtproject.qtdownlod2/AndroidIntentLauncher";
+#endif /* Q_OS_ANDROID */
+
 QuickDownloadMaster *QuickDownloadMaster::self = 0;
 
 QuickDownloadMaster::QuickDownloadMaster(QObject *parent):
@@ -121,6 +126,23 @@ void QuickDownload::setUrl(const QUrl &url)
         emit urlChanged();
     }
 }
+
+
+void QuickDownload::InstallApp(const QString &appPackageName) {
+
+     qDebug() << "DEBUGTXT InstallApp java ";
+#ifdef Q_OS_ANDROID
+
+
+
+        QAndroidJniObject jsText = QAndroidJniObject::fromString(appPackageName);
+        QAndroidJniObject::callStaticMethod<jint>(MY_JAVA_CLASS,
+                                           "installApp",
+                                           "(Ljava/lang/String;)I",
+                                           jsText.object<jstring>());
+        #endif /* Q_OS_ANDROID */
+        qDebug() << "DEBUGTXT InstallApp java done ";
+   }
 
 void QuickDownload::setHashSum(const QByteArray &hashsum)
 {

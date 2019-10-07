@@ -12,7 +12,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #if defined(Q_OS_ANDROID)
 //#QMAKE_LINK += '-nostdlib++'
 include (/android_openssl/openssl.pri)
-#QMAKE_LINK += '-nostdlib++'
+#QMAKE_LINK += ''
 android: QT += androidextras
 #elif defined(Q_OS_LINUX)
 QMAKE_LINK += ''
@@ -31,15 +31,17 @@ QMAKE_LINK += ''
 include(QuickDownload/quickdownload.pri)
 
 SOURCES += \
+        applicationui.cpp \
         langswitch.cpp \
-        main.cpp
+        main.cpp \
+        shareutils.cpp
 
-# can be placed under android only, but I prefer to see them always
-OTHER_FILES += android/src/org/ekkescorner/utils/QShareUtils.java \
-    android/src/org/ekkescorner/examples/sharex/QShareActivity.java \
-    android/src/org/ekkescorner/utils/QSharePathResolver.java
+RESOURCES += qml.qrc \
+            data_assets.qrc
 
-RESOURCES += qml.qrc
+OTHER_FILES +=     android/src/org/qtproject/qtdownlod2/QShareActivity.java \
+    android/src/org/qtproject/utils/QSharePathResolver.java \
+    android/src/org/qtproject/utils/QShareUtils.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -53,8 +55,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    cpp/android/androidshareutils.hpp \
-    langswitch.h
+    applicationui.hpp \
+    langswitch.h \
+    shareutils.hpp
 DISTFILES += \
     android/AndroidManifest.xml \
     android/build.gradle \
@@ -62,15 +65,13 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew.bat \
-    android/res/values/file_provider_paths.xml \
-    android/res/values/libs.xml
+    android/res/xml/filepaths.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \
         $$PWD/android
-    QT += androidextras
-    SOURCES += $$PWD/cpp/android/androidshareutils.cpp
-    HEADERS += $$PWD/cpp/android/androidshareutils.hpp
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-}
 
+    SOURCES += androidshareutils.cpp
+
+    HEADERS += androidshareutils.hpp
+}

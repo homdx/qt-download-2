@@ -19,6 +19,7 @@ public:
     QString userName();
     QString getAppPath();
     QString getnewAppPath();
+    void InstallApp(const QString &appPackageName);
     QString setAppPath(const QString &appPathChange);
     void setUserName(const QString &userName);
     bool requestPermissions();

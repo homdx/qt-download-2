@@ -5,7 +5,7 @@
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.
          Remove the comment if you do not require these default permissions. -->
     <!-- %%INSERT_PERMISSIONS -->
-
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <!-- The following comment will be replaced upon deployment with default features based on the dependencies of the application.
          Remove the comment if you do not require these default features. -->
     <!-- %%INSERT_FEATURES -->
@@ -26,11 +26,6 @@
         <!-- Define your provider -->
     <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
     <!-- https://www.qt.io/blog/2018/11/06/sharing-files-android-ios-qt-app-part-4 -->
-    <!-- Register the File Provider for document sharing -->
-    <provider android:name="android.support.v4.content.FileProvider" android:authorities="org.qtproject.qtdownlod2.fileprovider" android:grantUriPermissions="true" android:exported="false">
-        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
-    </provider>
-
             <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
             <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
             <meta-data android:name="android.app.repository" android:value="default"/>
@@ -91,10 +86,16 @@
 
     <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
 
+    <!-- Register the File Provider for document sharing -->
+    <provider android:name="android.support.v4.content.FileProvider" android:authorities="org.qtproject.qtdownlod2.fileprovider" android:grantUriPermissions="true" android:exported="false">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
+    </provider>
+
     </application>
 
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 </manifest>

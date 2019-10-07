@@ -26,11 +26,6 @@
         <!-- Define your provider -->
     <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
     <!-- https://www.qt.io/blog/2018/11/06/sharing-files-android-ios-qt-app-part-4 -->
-    <!-- Register the File Provider for document sharing -->
-    <provider android:name="android.support.v4.content.FileProvider" android:authorities="org.qtproject.qtdownlod2.fileprovider" android:grantUriPermissions="true" android:exported="false">
-        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
-    </provider>
-
             <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
             <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
             <meta-data android:name="android.app.repository" android:value="default"/>

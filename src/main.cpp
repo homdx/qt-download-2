@@ -6,19 +6,25 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qputenv("QT_QUICK_CONTROLS_STYLE", "material");
     QGuiApplication app(argc, argv);
 
+    ApplicationUI appui;
+
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
-    qmlRegisterType<LangSwitch>("io.qt.examples.langswitch", 1, 0, "LangSwitch");
-//    qmlRegisterType<QuickDownload>("com.blackgrain.qml.quickdownload", 1, 0, "Download");
+
+    // from QML we have access to ApplicationUI as myApp
+    QQmlContext* context = engine.rootContext();
+    context->setContextProperty("myApp", &appui);
+    // some more context properties
+    appui.addContextProperty(context);
+qmlRegisterType<LangSwitch>("io.qt.examples.langswitch", 1, 0, "LangSwitch");
+#if defined(Q_OS_ANDROID)
+    QObject::connect(&app, SIGNAL(applicationStateChanged(Qt::ApplicationState)), &appui, SLOT(onApplicationStateChanged(Qt::ApplicationState)));
+#endif
+    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
     return app.exec();
 }

@@ -37,7 +37,8 @@ SOURCES += \
         main.cpp \
         shareutils.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+            data_assets.qrc
 
 OTHER_FILES += $$PWD/android/AndroidIntentLauncher.java
 

@@ -45,7 +45,7 @@ import android.support.v4.app.ShareCompat;
 public class QShareUtils
 {
     // reference Authority as defined in AndroidManifest.xml
-    private static String AUTHORITY="org.ekkescorner.examples.sharex.fileprovider";
+    private static String AUTHORITY="org.qtproject.qtdownlod2.fileprovider";
 
     protected QShareUtils()
     {

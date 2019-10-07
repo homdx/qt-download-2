@@ -40,8 +40,10 @@ SOURCES += \
 RESOURCES += qml.qrc \
             data_assets.qrc
 
-OTHER_FILES += $$PWD/android/AndroidIntentLauncher.java \
-                $$PWD/android/examples/sharex/QShareActivity.java
+OTHER_FILES += $$PWD/android/src/org/qtproject/qtdownlod2/examples/sharex/QShareActivity.java \
+    $$PWD/android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
+    $$PWD/android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java \
+    $$PWD/data_assets/*.*
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -66,11 +68,7 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew.bat \
-    android/res/values/libs.xml \
-    android/res/xml/filepaths.xml \
-    android/src/org/qtproject/qtdownlod2/examples/sharex/QShareActivity.java \
-    android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
-    android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java
+    android/res/values/libs.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \

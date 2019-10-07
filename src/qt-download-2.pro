@@ -40,7 +40,8 @@ SOURCES += \
 RESOURCES += qml.qrc \
             data_assets.qrc
 
-OTHER_FILES += $$PWD/android/AndroidIntentLauncher.java
+OTHER_FILES += $$PWD/android/AndroidIntentLauncher.java \
+                $$PWD/android/examples/sharex/QShareActivity.java
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -66,8 +67,8 @@ DISTFILES += \
     android/gradlew \
     android/gradlew.bat \
     android/res/values/libs.xml \
-    android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java \
     android/res/xml/filepaths.xml \
+    android/src/org/qtproject/qtdownlod2/examples/sharex/QShareActivity.java \
     android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
     android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java
 

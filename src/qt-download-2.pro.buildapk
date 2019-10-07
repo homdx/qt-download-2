@@ -66,10 +66,10 @@ DISTFILES += \
     android/gradlew \
     android/gradlew.bat \
     android/res/values/libs.xml \
-    android/src/org/qtproject/qtdownlod2/AndroidIntentLauncher.java \
     android/res/xml/filepaths.xml \
     android/src/org/qtproject/qtdownlod2/utils/QSharePathResolver.java \
-    android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java
+    android/src/org/qtproject/qtdownlod2/utils/QShareUtils.java \
+    android/src/org/qtproject/qtdownlod2/examples/sharex/QShareActivity.java
 
 
 

@@ -3,7 +3,7 @@
 // original copyright: Copyright (c) 2017 xeiyan@gmail.com
 // src slightly modified to be used into Qt Projects: (c) 2017 ekke@ekkes-corner.org
 
-package org.qtproject.qtdownlod2;
+package org.qtproject.utils;
 
 import android.content.Context;
 import android.database.Cursor;

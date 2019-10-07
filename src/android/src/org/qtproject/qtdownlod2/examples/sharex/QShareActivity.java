@@ -13,7 +13,7 @@
 //
 // see also /COPYRIGHT and /LICENSE
 
-package org.qtproject.qtdownlod2;
+package org.qtproject.qtdownlod2.examples.sharex;
 
 import org.qtproject.qt5.android.QtNative;
 
@@ -30,11 +30,11 @@ import android.util.Log;
 import android.content.ContentResolver;
 import android.webkit.MimeTypeMap;
 
-import org.qtproject.qtdownlod2.*;
+import org.qtproject.utils.*;
 
 
 
-public class AndroidIntentLauncher extends QtActivity
+public class QShareActivity extends QtActivity
 {
     // native - must be implemented in Cpp via JNI
     // 'file' scheme or resolved from 'content' scheme:
@@ -226,7 +226,3 @@ public class AndroidIntentLauncher extends QtActivity
     } // processIntent
 
 } // class QShareActivity
-
-
-
-

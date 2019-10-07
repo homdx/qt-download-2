@@ -10,7 +10,7 @@
 // https://stackoverflow.com/questions/5734678/custom-filtering-of-intent-chooser-based-on-installed-android-package-name
 // see also /COPYRIGHT and /LICENSE
 
-package org.qtproject.qtdownlod2;
+package org.qtproject.utils;
 
 import org.qtproject.qt5.android.QtNative;
 

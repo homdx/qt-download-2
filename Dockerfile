@@ -19,7 +19,7 @@ ARG LLVM_VERSION=9.0.0
 RUN cd / && curl -SL http://releases.llvm.org/${LLVM_VERSION}/llvm-${LLVM_VERSION}.src.tar.xz  -o ${LLVM_VERSION}.tar.xz \
 && tar -xf ${LLVM_VERSION}.tar.xz && rm ${LLVM_VERSION}.tar.xz \
 && apt install cmake -y && cd llvm-${LLVM_VERSION}.src && mkdir build && cd build \
-&& cmake .. && make -j4 && make install && rm -rf /llvm-${LLVM_VERSION}.src
+&& cmake .. && make -j2 && clang --version && make install && rm -rf /llvm-${LLVM_VERSION}.src && clang --version
 
 ADD . /app/${projname}/
 

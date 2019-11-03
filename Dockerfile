@@ -23,7 +23,7 @@ ARG profile=qt-download-2.pro
 
 ARG CLANG_VERSION=9.0.0
 
-RUN cd / && curl -SL http://releases.llvm.org/${LLVM_VERSION}/cfe-${CLANG_VERSION}.src.tar.xz  -o ${CLANG_VERSION}.tar.xz && tar -xf ${CLANG_VERSION}.tar.xz \
+RUN cd / && curl -SL http://releases.llvm.org/${CLANG_VERSION=9.0.0}/cfe-${CLANG_VERSION}.src.tar.xz  -o ${CLANG_VERSION}.tar.xz && tar -xf ${CLANG_VERSION}.tar.xz \
 && rm ${CLANG_VERSION}.tar.xz \
 && apt install cmake -y && cd cfe-${CLANG_VERSION}.src && mkdir build && cd build && cmake .. && make -j2 \
 && apt remove clang-7 \

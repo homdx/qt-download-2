@@ -13,7 +13,7 @@ RUN JAVA_HOME=$(dirname $( readlink -f $(which java) )) \
 	&&  chmod u+rx /tmp/install-android-sdk \
    && /tmp/install-android-sdk $SDK_INSTALL_PARAMS
 
-RUN apt-get install time aria2 -y && mkdir /Qt5140 && cd /Qt5140 && \
+RUN mkdir /Qt5140 && cd /Qt5140 && \
     aria2c -x10 -k1M https://github.com/homdx/qt-download-2/releases/download/3/qt514.aa && \
     echo curl -SL https://github.com/homdx/qt-download-2/releases/download/3/qt514.aa -o qt514.aa && \
     aria2c -x10 -k1M https://github.com/homdx/qt-download-2/releases/download/3/qt514.ab && \

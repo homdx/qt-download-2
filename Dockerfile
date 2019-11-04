@@ -2,7 +2,7 @@ FROM fedora
 
 ARG NDK_VERSION=r20
 ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
-ARG JAVA_HOME=/usr/lib/jvm
+ARG JAVA_HOME=/usr/lib/jvm/java
 
 RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 -y
 

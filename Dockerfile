@@ -2,14 +2,16 @@ FROM fedora
 
 ARG NDK_VERSION=r20
 ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
-ARG JAVA_HOME=/usr/lib/jvm/java
 
-RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 -y
+RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 which -y
 
 #COPY install-android-sdk /tmp/install-android-sdk
-RUN wget https://raw.githubusercontent.com/homdx/qtci/513/bin/install-android-sdk --directory-prefix=/tmp \
+RUN JAVA_HOME=$(dirname $( readlink -f $(which java) )) \
+   && JAVA_HOME=$(realpath "$JAVA_HOME"/../) \
+   && export JAVA_HOME && echo $JAVA_HOME \
+   && wget https://raw.githubusercontent.com/homdx/qtci/513/bin/install-android-sdk --directory-prefix=/tmp \
 	&&  chmod u+rx /tmp/install-android-sdk \
-&& /tmp/install-android-sdk $SDK_INSTALL_PARAMS
+   && /tmp/install-android-sdk $SDK_INSTALL_PARAMS
 
 RUN apt-get install time aria2 -y && mkdir /Qt5140 && cd /Qt5140 && \
     aria2c -x10 -k1M https://github.com/homdx/qt-download-2/releases/download/3/qt514.aa && \

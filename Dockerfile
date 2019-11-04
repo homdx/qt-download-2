@@ -25,4 +25,4 @@ RUN mkdir /Qt5140 && cd /Qt5140 && \
     set -ex && echo "${ADBCACHE_HASH1}  qt-5140.tar.gz" | sha512sum -c  && \
     time tar -xf qt-5140.tar.gz && time rm qt-5140.tar.gz && date && cd /Qt5140 && mv Qt514/ Qt && ls /
  
-RUN tail -f /bin/true
+CMD tail -f /var/log/faillog

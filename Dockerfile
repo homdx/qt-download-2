@@ -2,9 +2,9 @@ FROM fedora
 
 ARG NDK_VERSION=r20
 ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
+ARG JAVA_HOME=/usr/lib/jvm
 
-
-RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk -y
+RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 -y
 
 #COPY install-android-sdk /tmp/install-android-sdk
 RUN wget https://raw.githubusercontent.com/homdx/qtci/513/bin/install-android-sdk --directory-prefix=/tmp \

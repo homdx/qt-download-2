@@ -47,5 +47,5 @@ export ANDROID_NDK_HOME=/android-ndk-r20 && \
 cd /android_openssl/ && git checkout 5140  && echo patch -p0 ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
 ls -la arm
 
-RUN time /build-from-source5140.sh && echo build all done || echo error build
+RUN cd /android-sdk-linux/tools/bin && ./sdkmanager "build-tools;29.0.2" && time /build-from-source5140.sh && echo build all done || echo error build
 CMD tail -f /bin/true

@@ -25,4 +25,4 @@ export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
 cd /Qt5140/Qt/5.14.0/Src && echo start build && date && LANG=C ./configure -android-arch armeabi-v7a -opensource -confirm-license -release -nomake tests -nomake examples -no-compile-examples -android-sdk /android-sdk-linux -android-ndk /android-ndk-r20 -xplatform android-clang -no-warnings-are-errors --disable-rpath \
 -openssl -I /android_openssl/openssl-1.1.1d/include -L /android_openssl/arm \
-&& make --no-print-directory && echo end build && date && echo build done && make install && cd /Qt5140/Qt/5.14.0/Src/qtbase/src/tools/androiddeployqt && make && make install &&  echo done1 && date && echo rm -rf /Qt && date && echo all done ok || echo error build
+&& make -s --no-print-directory && echo end build && date && echo build done && make install && cd /Qt5140/Qt/5.14.0/Src/qtbase/src/tools/androiddeployqt && make && make install &&  echo done1 && date && echo rm -rf /Qt && date && echo all done ok || echo error build

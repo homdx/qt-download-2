@@ -30,7 +30,7 @@ COPY build-from-source5140.sh /
 
 #&& cd / && git clone https://github.com/homdx/android_openssl.git && cd /android_openssl && echo git checkout master
 
-RUN git clone https://github.com/KDAB/android_openssl.git  && \
+RUN cd /android-sdk-linux/tools/bin/ && ./sdkmanager "platforms;android-21" && cd / && git clone https://github.com/KDAB/android_openssl.git  && \
 mkdir ~/android && ln -s /android-ndk-r20 ~/android/ndk-bundle && cd /android_openssl && echo time ./build_ssl.sh
 
 #COPY ssl.patch /android_openssl/ssl.patch

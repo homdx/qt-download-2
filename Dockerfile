@@ -2,6 +2,7 @@ FROM fedora
 
 ARG NDK_VERSION=r20
 ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
+ARG ANDROID_SDK_ROOT=/android-sdk-linux
 ARG ADBCACHE_HASH1=0ccf3272db15fb9520e75ff584b784a7d02ac3630b66b7cdadc6b741c7fe8cfac52124e09eb876e2da319763e4dcdef3496b56ddaac9af700d268f565ca71bad
 
 RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 which patch git make -y
@@ -32,7 +33,7 @@ COPY build-from-source5140.sh /
 RUN git clone https://github.com/KDAB/android_openssl.git  && \
 mkdir ~/android && ln -s /android-ndk-r20 ~/android/ndk-bundle && cd /android_openssl && echo time ./build_ssl.sh
 
-COPY ssl.patch /android_openssl/ssl.patch
+#COPY ssl.patch /android_openssl/ssl.patch
 
 RUN echo build OpenSSL from sources && \
 export NDK_VERSION=r20 && \
@@ -43,7 +44,7 @@ export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
 export ANDROID_NDK_HOME=/android-ndk-r20 && \
-cd /android_openssl/ && git checkout master && echo patch -p0 <ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
+cd /android_openssl/ && git checkout master && echo patch -p0 ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
 ls -la arm
 
 RUN time /build-from-source5140.sh && echo build all done || echo error build

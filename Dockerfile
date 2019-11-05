@@ -30,7 +30,7 @@ COPY build-from-source5140.sh /
 
 #&& cd / && git clone https://github.com/homdx/android_openssl.git && cd /android_openssl && echo git checkout master
 
-RUN cd /android-sdk-linux/tools/bin/ && ./sdkmanager "platforms;android-21" && cd / && git clone https://github.com/KDAB/android_openssl.git  && \
+RUN cd /android-sdk-linux/tools/bin/ && ./sdkmanager "platforms;android-21" && cd / && git clone https://github.com/homdx/android_openssl.git  && \
 mkdir ~/android && ln -s /android-ndk-r20 ~/android/ndk-bundle && cd /android_openssl && echo time ./build_ssl.sh
 
 #COPY ssl.patch /android_openssl/ssl.patch
@@ -44,7 +44,7 @@ export    ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi c && \
 export    ANDROID_NDK_TOOLCHAIN_VERSION=4.9 c && \
 export DEBIAN_FRONTEND=noninteractive c && \
 export ANDROID_NDK_HOME=/android-ndk-r20 && \
-cd /android_openssl/ && git checkout master && echo patch -p0 ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
+cd /android_openssl/ && git checkout 5140  && echo patch -p0 ssl.patch && echo start build ssl && date && time ./build_ssl.sh && date && echo build done && \
 ls -la arm
 
 RUN time /build-from-source5140.sh && echo build all done || echo error build

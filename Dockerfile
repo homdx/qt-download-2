@@ -5,7 +5,7 @@ ARG SDK_INSTALL_PARAMS=platform-tool,build-tools-28.0.2,android-21
 ARG ANDROID_SDK_ROOT=/android-sdk-linux
 ARG ADBCACHE_HASH1=0ccf3272db15fb9520e75ff584b784a7d02ac3630b66b7cdadc6b741c7fe8cfac52124e09eb876e2da319763e4dcdef3496b56ddaac9af700d268f565ca71bad
 
-RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk aria2 which patch git make -y
+RUN dnf update -y && dnf install clang unzip wget time java-1.8.0-openjdk java-1.8.0-openjdk-devel aria2 which patch git make -y
 
 #COPY install-android-sdk /tmp/install-android-sdk
 RUN JAVA_HOME=$(dirname $( readlink -f $(which java) )) \
